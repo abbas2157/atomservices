@@ -1,41 +1,45 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+/**
+ * Contact form handler.
+ * Sends submissions to $receiving_email_address using PHP's built-in mail().
+ * Always responds with HTTP 200; the body is either "OK" or an error message,
+ * matching the contract expected by assets/vendor/php-email-form/validate.js.
+ */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+header('Content-Type: text/plain; charset=utf-8');
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+$receiving_email_address = 'info@atomservices.org';
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  die('Invalid request method.');
+}
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$subject = trim($_POST['subject'] ?? '');
+$message = trim($_POST['message'] ?? '');
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+if ($name === '' || $email === '' || $subject === '' || $message === '') {
+  die('Please fill in all fields.');
+}
 
-  echo $contact->send();
-?>
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  die('Please provide a valid email address.');
+}
+
+// Strip line breaks from single-line fields to prevent header injection.
+$name = str_replace(["\r", "\n"], '', $name);
+$subject = str_replace(["\r", "\n"], '', $subject);
+
+$mailSubject = 'New contact message: ' . $subject;
+$body = "From: {$name}\nEmail: {$email}\n\nMessage:\n{$message}\n";
+
+$headers = "From: {$receiving_email_address}\r\n";
+$headers .= "Reply-To: {$email}\r\n";
+$headers .= "X-Mailer: PHP/" . phpversion();
+
+if (mail($receiving_email_address, $mailSubject, $body, $headers)) {
+  echo 'OK';
+} else {
+  echo 'Message could not be sent. Please try again later.';
+}

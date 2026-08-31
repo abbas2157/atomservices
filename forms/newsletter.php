@@ -1,39 +1,34 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+/**
+ * Newsletter subscription handler.
+ * Sends submissions to $receiving_email_address using PHP's built-in mail().
+ * Always responds with HTTP 200; the body is either "OK" or an error message,
+ * matching the contract expected by assets/vendor/php-email-form/validate.js.
+ */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+header('Content-Type: text/plain; charset=utf-8');
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+$receiving_email_address = 'info@atomservices.org';
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['email'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject ="New Subscription: " . $_POST['email'];
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  die('Invalid request method.');
+}
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+$email = trim($_POST['email'] ?? '');
 
-  $contact->add_message( $_POST['email'], 'Email');
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  die('Please provide a valid email address.');
+}
 
-  echo $contact->send();
-?>
+$mailSubject = 'New Newsletter Subscription: ' . $email;
+$body = "Email: {$email}\n";
+
+$headers = "From: {$receiving_email_address}\r\n";
+$headers .= "Reply-To: {$email}\r\n";
+$headers .= "X-Mailer: PHP/" . phpversion();
+
+if (mail($receiving_email_address, $mailSubject, $body, $headers)) {
+  echo 'OK';
+} else {
+  echo 'Subscription could not be sent. Please try again later.';
+}

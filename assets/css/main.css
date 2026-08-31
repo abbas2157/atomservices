@@ -23,6 +23,7 @@
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #5f687b; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #10bc69; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color-a11y: #0b8248; /* Darker accent used behind white text so buttons meet the WCAG 4.5:1 contrast ratio */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -243,6 +244,7 @@ h6 {
 
 .header .logo img {
   max-height: 36px;
+  width: auto;
   margin-right: 8px;
 }
 
@@ -256,7 +258,7 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: var(--accent-color-a11y);
   font-size: 14px;
   padding: 8px 25px;
   margin: 0 0 0 30px;
@@ -267,7 +269,7 @@ h6 {
 .header .btn-getstarted:hover,
 .header .btn-getstarted:focus:hover {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  background: color-mix(in srgb, var(--accent-color-a11y), transparent 15%);
 }
 
 @media (max-width: 1200px) {
@@ -581,14 +583,14 @@ h6 {
   font-size: 16px;
   padding: 0 20px;
   margin: -7px -8px -7px 0;
-  background: var(--accent-color);
+  background: var(--accent-color-a11y);
   color: var(--contrast-color);
   transition: 0.3s;
   border-radius: 50px;
 }
 
 .footer .footer-newsletter .newsletter-form input[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+  background: color-mix(in srgb, var(--accent-color-a11y), transparent 20%);
 }
 
 .footer .footer-top {
@@ -888,7 +890,7 @@ section,
 }
 
 .hero p {
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
   margin: 5px 0 30px 0;
   font-size: 20px;
   font-weight: 400;
@@ -896,7 +898,7 @@ section,
 
 .hero .btn-get-started {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: var(--accent-color-a11y);
   font-family: var(--heading-font);
   font-weight: 400;
   font-size: 15px;
@@ -910,7 +912,7 @@ section,
 
 .hero .btn-get-started:hover {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  background: color-mix(in srgb, var(--accent-color-a11y), transparent 15%);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
 }
 

@@ -1,61 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Atom Services Private Limited</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-</head>
-
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/logo.png" alt="">
-        <!-- <h1 class="sitename">eNno</h1> -->
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
-
-    </div>
-  </header>
-
-  <main class="main">
+<?php
+$pageTitle = 'Atom Services Private Limited';
+$metaDescription = "Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. Home of Atomshop.pk, Pakistan's leading installment shopping platform.";
+$bodyClass = 'index-page';
+$needsGlightbox = true;
+$needsPureCounter = true;
+$needsIsotope = true;
+include __DIR__ . '/includes/header.php';
+?>
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
@@ -71,7 +22,10 @@
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+            <picture>
+              <source srcset="assets/img/hero-img.webp" type="image/webp">
+              <img src="assets/img/hero-img.png" class="img-fluid animated" alt="Atom Services team building custom software" width="800" height="752" fetchpriority="high">
+            </picture>
           </div>
         </div>
       </div>
@@ -92,7 +46,10 @@
 
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/about.png" class="img-fluid" alt="">
+            <picture>
+              <source srcset="assets/img/about.webp" type="image/webp">
+              <img src="assets/img/about.png" class="img-fluid" alt="Atom Services software development team at work" width="800" height="565" loading="lazy" decoding="async">
+            </picture>
           </div>
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
             <h3>Why Choose Us</h3>
@@ -106,9 +63,6 @@
               <li><i class="bi bi-check2-all"></i> <span>Reliable long-term support </span></li>
               <li><i class="bi bi-check2-all"></i> <span>Proven in-house SaaS platforms</span></li>
             </ul>
-            <p>
-              
-            </p>
           </div>
         </div>
 
@@ -216,7 +170,6 @@
                 <h3>UI/UX Design</h3>
               </a>
               <p> Sleek, user-centered digital experiences</p>
-              <a href="#" class="stretched-link"></a>
             </div>
           </div>
         </div>
@@ -244,44 +197,55 @@
           <!-- End Portfolio Filters -->
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop">
+              <picture>
+                <source srcset="assets/img/portfolio/atomshop.webp" type="image/webp">
+                <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop" width="700" height="525" loading="lazy" decoding="async">
+              </picture>
               <div class="portfolio-info">
-                <h4>Atomshop.pk</h4>
+                <h4 aria-level="3">Atomshop.pk</h4>
                 <p>Atomshop.pk - Pay in steps</p>
                 <a href="assets/img/portfolio/atomshop.png" title="Atomshop.pk" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="atomshop.pk" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="https://atomshop.pk" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="assets/img/portfolio/SOPS.png" class="img-fluid" alt="School of professional Skills">
+              <picture>
+                <source srcset="assets/img/portfolio/SOPS.webp" type="image/webp">
+                <img src="assets/img/portfolio/SOPS.png" class="img-fluid" alt="School of professional Skills" width="700" height="525" loading="lazy" decoding="async">
+              </picture>
               <div class="portfolio-info">
-                <h4>SOPS</h4>
+                <h4 aria-level="3">SOPS</h4>
                 <p>School of professional Skills</p>
                 <a href="assets/img/portfolio/SOPS.png" title="SOPS" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://sops.pk/" target="_blank" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="https://sops.pk/" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop">
+              <picture>
+                <source srcset="assets/img/portfolio/atomshop.webp" type="image/webp">
+                <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop" width="700" height="525" loading="lazy" decoding="async">
+              </picture>
               <div class="portfolio-info">
-                <h4>Atomshop App</h4>
+                <h4 aria-level="3">Atomshop App</h4>
                 <p>Atomshop.pk - Pay in steps</p>
                 <a href="assets/img/portfolio/atomshop.png" title="Atomshop App" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://play.google.com/store/apps/details?id=com.atomtrio.atomshop" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="https://play.google.com/store/apps/details?id=com.atomtrio.atomshop" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="assets/img/portfolio/Daily-english.png" class="img-fluid" alt="Daily English">
+              <picture>
+                <source srcset="assets/img/portfolio/Daily-english.webp" type="image/webp">
+                <img src="assets/img/portfolio/Daily-english.png" class="img-fluid" alt="Daily English" width="700" height="525" loading="lazy" decoding="async">
+              </picture>
               <div class="portfolio-info">
-                <h4>Daily English</h4>
+                <h4 aria-level="3">Daily English</h4>
                 <p>Lorem ipsum, dolor sit amet consectetur</p>
                 <a href="assets/img/portfolio/Daily-english.png" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://play.google.com/store/apps/details?id=com.mudassirabbas.daily_e" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="https://play.google.com/store/apps/details?id=com.mudassirabbas.daily_e" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
-            
 
           </div>
         </div>
@@ -298,8 +262,8 @@
           <div class="col-xl-10">
             <div class="text-center">
               <h3>Call To Action</h3>
-              <p>Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. We build custom solutions and own platforms like Atomshop.pk—Pakistan’s leading installment shopping system—available as a SaaS product for digital entrepreneurs.              </p>
-              <a class="cta-btn" href="#">Call To Action</a>
+              <p>Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. We build custom solutions and own platforms like Atomshop.pk—Pakistan’s leading installment shopping system—available as a SaaS product for digital entrepreneurs.</p>
+              <a class="cta-btn" href="#contact">Call To Action</a>
             </div>
           </div>
         </div>
@@ -323,14 +287,14 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/team-1.jpeg" class="img-fluid" alt="Adnan Zaka"></div>
+              <div class="pic"><picture><source srcset="assets/img/team/team-1.webp" type="image/webp"><img src="assets/img/team/team-1.jpeg" class="img-fluid" alt="Adnan Zaka" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
-                <h4>Adnan Zaka</h4>
+                <h4 aria-level="3">Adnan Zaka</h4>
                 <span>Chief Executive Officer</span>
                 <div class="social">
-                  <a href="https://www.facebook.com/adnan.zaka.54/"><i class="bi bi-facebook"></i></a>
-                  <a href="https://www.instagram.com/adnan.zaka.54/"><i class="bi bi-instagram"></i></a>
-                  <a href="https://www.linkedin.com/in/adnan-zaka/"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://www.facebook.com/adnan.zaka.54/" target="_blank" rel="noopener" aria-label="Adnan Zaka on Facebook"><i class="bi bi-facebook"></i></a>
+                  <a href="https://www.instagram.com/adnan.zaka.54/" target="_blank" rel="noopener" aria-label="Adnan Zaka on Instagram"><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.linkedin.com/in/adnan-zaka/" target="_blank" rel="noopener" aria-label="Adnan Zaka on LinkedIn"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -338,14 +302,14 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/team-2.png" class="img-fluid" alt="Mudassar Abbas"></div>
+              <div class="pic"><picture><source srcset="assets/img/team/team-2.webp" type="image/webp"><img src="assets/img/team/team-2.png" class="img-fluid" alt="Mudassar Abbas" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
-                <h4>Mudassar Abbas</h4>
+                <h4 aria-level="3">Mudassar Abbas</h4>
                 <span>Product Manager</span>
                 <div class="social">
-                  <a href="https://www.facebook.com/mudassar.abbas.9277"><i class="bi bi-facebook"></i></a>
-                  <a href="https://github.com/abbas2157"><i class="bi bi-github"></i></a>
-                  <a href="https://www.linkedin.com/in/mudassar-abbas-8267b8113/"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://www.facebook.com/mudassar.abbas.9277" target="_blank" rel="noopener" aria-label="Mudassar Abbas on Facebook"><i class="bi bi-facebook"></i></a>
+                  <a href="https://github.com/abbas2157" target="_blank" rel="noopener" aria-label="Mudassar Abbas on GitHub"><i class="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/mudassar-abbas-8267b8113/" target="_blank" rel="noopener" aria-label="Mudassar Abbas on LinkedIn"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -353,13 +317,13 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/team-3.png" class="img-fluid" alt="Muhammad Javed Rafique"></div>
+              <div class="pic"><picture><source srcset="assets/img/team/team-3.webp" type="image/webp"><img src="assets/img/team/team-3.png" class="img-fluid" alt="Muhammad Javed Rafique" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
-                <h4>Muhammad Javed Rafique</h4>
+                <h4 aria-level="3">Muhammad Javed Rafique</h4>
                 <span>Mobile App Manager</span>
                 <div class="social">
-                  <a href="https://github.com/Muhammadjaved7209"><i class="bi bi-github"></i></a>
-                  <a href="www.linkedin.com/in/muhammad-javed-rafique-902672216"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://github.com/Muhammadjaved7209" target="_blank" rel="noopener" aria-label="Muhammad Javed Rafique on GitHub"><i class="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/muhammad-javed-rafique-902672216" target="_blank" rel="noopener" aria-label="Muhammad Javed Rafique on LinkedIn"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -420,22 +384,22 @@
 
                 <div class="col-md-6">
                   <label for="name-field" class="pb-2">Your Name</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                  <input type="text" name="name" id="name-field" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">
                   <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                  <input type="email" class="form-control" name="email" id="email-field" required>
                 </div>
 
                 <div class="col-md-12">
                   <label for="subject-field" class="pb-2">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                  <input type="text" class="form-control" name="subject" id="subject-field" required>
                 </div>
 
                 <div class="col-md-12">
                   <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -456,87 +420,4 @@
 
     </section><!-- /Contact Section -->
 
-  </main>
-
-  <footer id="footer" class="footer">
-
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-            <form action="forms/newsletter.php" method="post" class="php-email-form">
-              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
-            <span class="sitename">Atom Services</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>Sheridan, Wyoming</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+16467260635</span></p>
-            <p><strong>Email:</strong> <span>info@atomservices.org</span></p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-3 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-12">
-          <h4>Follow Us</h4>
-          <p>Atom Services LLC is a group of renowned IT Professional Agencies. It serves as a One-Stop-Shop for all their Customers, and Organizations. We help Building Businesses from Scratch.</p>
-          <div class="social-links d-flex">
-            <a href="https://www.facebook.com/AtomServicesOfficial/"><i class="bi bi-facebook"></i></a>
-            <a href="https://www.linkedin.com/company/atomservicesofficial/"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">atomservices.org</strong> <span>All Rights Reserved</span></p>
-      
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>
