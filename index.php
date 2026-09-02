@@ -1,32 +1,23 @@
 <?php
-$pageTitle = 'Atom Services Private Limited';
-$metaDescription = "Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. Home of Atomshop.pk, Pakistan's leading installment shopping platform.";
+$pageTitle = 'Atom Services (Pvt) Ltd — AI Powered Product Financing Marketplace';
+$metaDescription = "Atom Services (Pvt) Ltd is an AI-powered product financing marketplace. Smarter finance, better tomorrow — home of AtomShop.pk, AtomPay, KDP Score, and Mark Attendance.";
 $bodyClass = 'index-page';
-$needsGlightbox = true;
 $needsPureCounter = true;
-$needsIsotope = true;
 include __DIR__ . '/includes/header.php';
 ?>
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
 
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-            <h1>We Build Tech That Builds Businesses</h1>
-            <p>Custom Software. Mobile Apps. Scalable SaaS Products.</p>
-            <div class="d-flex">
-              <a href="#about" class="btn-get-started">Get Started</a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <picture>
-              <source srcset="assets/img/hero-img.webp" type="image/webp">
-              <img src="assets/img/hero-img.png" class="img-fluid animated" alt="Atom Services team building custom software" width="800" height="752" fetchpriority="high">
-            </picture>
-          </div>
+      <div class="container text-center" data-aos="fade-up">
+        <h1 class="visually-hidden">Atom Services (Pvt) Ltd — AI Powered Product Financing Marketplace. Smarter Finance. Better Tomorrow.</h1>
+        <picture>
+          <source srcset="assets/img/banner-hero.webp" type="image/webp">
+          <img src="assets/img/banner-hero.jpg" class="img-fluid hero-banner" alt="Atom Services (Pvt) Ltd — AI Powered Product Financing Marketplace. Smarter Finance. Better Tomorrow. Our products: AtomShop.pk, AtomPay, KDP Score, Mark Attendance." width="1600" height="640" fetchpriority="high">
+        </picture>
+        <div class="d-flex justify-content-center flex-wrap">
+          <a href="#about" class="btn-get-started">Get Started</a>
+          <a href="#portfolio" class="btn-watch-video d-flex align-items-center"><i class="bi bi-grid"></i><span>Explore Our Products</span></a>
         </div>
       </div>
 
@@ -39,7 +30,7 @@ include __DIR__ . '/includes/header.php';
       <div class="container section-title" data-aos="fade-up">
         <span>Who We Are<br></span>
         <h2>About</h2>
-        <p>Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. We build custom solutions and own platforms like Atomshop.pk—Pakistan’s leading installment shopping system—available as a SaaS product for digital entrepreneurs.</p>
+        <p>Atom Services (Pvt) Ltd is an AI-powered product financing marketplace helping businesses and people access smarter finance. We build and own platforms like AtomShop.pk, AtomPay, KDP Score, and Mark Attendance—driving growth through technology built for people and businesses alike.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -54,14 +45,13 @@ include __DIR__ . '/includes/header.php';
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
             <h3>Why Choose Us</h3>
             <p class="fst-italic">
-              Built for Impact
+              Smarter Finance. Better Tomorrow.
             </p>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Business-first development</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Scalable architecture</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Fast MVP delivery</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Reliable long-term support </span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Proven in-house SaaS platforms</span></li>
+              <li><i class="bi bi-cpu"></i> <span>AI Powered Intelligence</span></li>
+              <li><i class="bi bi-shield-check"></i> <span>Secure &amp; Reliable</span></li>
+              <li><i class="bi bi-people"></i> <span>Built for People &amp; Businesses</span></li>
+              <li><i class="bi bi-graph-up-arrow"></i> <span>Driving Growth Through Innovation</span></li>
             </ul>
           </div>
         </div>
@@ -118,7 +108,7 @@ include __DIR__ . '/includes/header.php';
       <div class="container section-title" data-aos="fade-up">
         <span>What We Do</span>
         <h2>Services</h2>
-        <p>Services with quality work</p>
+        <p>The capabilities behind every product we build</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -178,81 +168,65 @@ include __DIR__ . '/includes/header.php';
 
     </section><!-- /Services Section -->
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
+    <!-- Products Section -->
+    <section id="portfolio" class="products section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <span>Platforms We Own</span>
-        <h2>Portfolio</h2>
-        <p>Awesome Projects what we develop</p>
+        <h2>Our Products</h2>
+        <p>AI-powered platforms built for smarter finance and growth</p>
       </div><!-- End Section Title -->
+
       <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Website</li>
-          </ul>
-          <!-- End Portfolio Filters -->
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <picture>
-                <source srcset="assets/img/portfolio/atomshop.webp" type="image/webp">
-                <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop" width="700" height="525" loading="lazy" decoding="async">
-              </picture>
-              <div class="portfolio-info">
-                <h4 aria-level="3">Atomshop.pk</h4>
-                <p>Atomshop.pk - Pay in steps</p>
-                <a href="assets/img/portfolio/atomshop.png" title="Atomshop.pk" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://atomshop.pk" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <picture>
-                <source srcset="assets/img/portfolio/SOPS.webp" type="image/webp">
-                <img src="assets/img/portfolio/SOPS.png" class="img-fluid" alt="School of professional Skills" width="700" height="525" loading="lazy" decoding="async">
-              </picture>
-              <div class="portfolio-info">
-                <h4 aria-level="3">SOPS</h4>
-                <p>School of professional Skills</p>
-                <a href="assets/img/portfolio/SOPS.png" title="SOPS" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://sops.pk/" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
+        <div class="row gy-4">
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-item">
               <picture>
-                <source srcset="assets/img/portfolio/atomshop.webp" type="image/webp">
-                <img src="assets/img/portfolio/atomshop.png" class="img-fluid" alt="Atomshop" width="700" height="525" loading="lazy" decoding="async">
+                <source srcset="assets/img/products/atomshop-badge.webp" type="image/webp">
+                <img src="assets/img/products/atomshop-badge.png" class="img-fluid" alt="AtomShop.pk logo" width="649" height="131" loading="lazy" decoding="async">
               </picture>
-              <div class="portfolio-info">
-                <h4 aria-level="3">Atomshop App</h4>
-                <p>Atomshop.pk - Pay in steps</p>
-                <a href="assets/img/portfolio/atomshop.png" title="Atomshop App" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://play.google.com/store/apps/details?id=com.atomtrio.atomshop" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
+              <p>Pakistan's leading installment shopping platform — pay in steps.</p>
+              <a href="https://atomshop.pk" target="_blank" rel="noopener" class="product-link">Visit atomshop.pk <i class="bi bi-arrow-up-right"></i></a>
             </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <picture>
-                <source srcset="assets/img/portfolio/Daily-english.webp" type="image/webp">
-                <img src="assets/img/portfolio/Daily-english.png" class="img-fluid" alt="Daily English" width="700" height="525" loading="lazy" decoding="async">
-              </picture>
-              <div class="portfolio-info">
-                <h4 aria-level="3">Daily English</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                <a href="assets/img/portfolio/Daily-english.png" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="https://play.google.com/store/apps/details?id=com.mudassirabbas.daily_e" target="_blank" rel="noopener" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-
           </div>
-        </div>
 
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-item">
+              <picture>
+                <source srcset="assets/img/products/atompay-badge.webp" type="image/webp">
+                <img src="assets/img/products/atompay-badge.png" class="img-fluid" alt="AtomPay logo" width="561" height="131" loading="lazy" decoding="async">
+              </picture>
+              <p>Secure digital wallet and payments platform.</p>
+              <a href="https://atompay.shop" target="_blank" rel="noopener" class="product-link">Visit atompay.shop <i class="bi bi-arrow-up-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-item">
+              <picture>
+                <source srcset="assets/img/products/kdpscore-badge.webp" type="image/webp">
+                <img src="assets/img/products/kdpscore-badge.png" class="img-fluid" alt="KDP Score logo" width="682" height="139" loading="lazy" decoding="async">
+              </picture>
+              <p>Amazon KDP niche intelligence, powered by AI.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="product-item">
+              <picture>
+                <source srcset="assets/img/products/markattendance-badge.webp" type="image/webp">
+                <img src="assets/img/products/markattendance-badge.png" class="img-fluid" alt="Mark Attendance logo" width="600" height="139" loading="lazy" decoding="async">
+              </picture>
+              <p>Simple, reliable attendance tracking for teams.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-    </section><!-- /Portfolio Section -->
+    </section><!-- /Products Section -->
 
     <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section accent-background">
@@ -261,9 +235,9 @@ include __DIR__ . '/includes/header.php';
         <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
-              <h3>Call To Action</h3>
-              <p>Atom Services (Pvt) Ltd is a software and app development company helping businesses grow through technology. We build custom solutions and own platforms like Atomshop.pk—Pakistan’s leading installment shopping system—available as a SaaS product for digital entrepreneurs.</p>
-              <a class="cta-btn" href="#contact">Call To Action</a>
+              <h3>Smarter Finance. Better Tomorrow.</h3>
+              <p>Atom Services (Pvt) Ltd is an AI-powered product financing marketplace helping businesses and people access smarter finance. Explore AtomShop.pk, AtomPay, KDP Score, and Mark Attendance—built for people and businesses alike.</p>
+              <a class="cta-btn" href="#contact">Get In Touch</a>
             </div>
           </div>
         </div>
