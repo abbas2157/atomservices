@@ -259,12 +259,12 @@ include __DIR__ . '/includes/header.php';
 
         <div class="row gy-5">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="pic"><picture><source srcset="assets/img/team/team-1.webp" type="image/webp"><img src="assets/img/team/team-1.jpeg" class="img-fluid" alt="Adnan Zaka" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
                 <h4 aria-level="3">Adnan Zaka</h4>
-                <span>Chief Executive Officer</span>
+                <span>Founder &amp; Chief Executive Officer (CEO)</span>
                 <div class="social">
                   <a href="https://www.facebook.com/adnan.zaka.54/" target="_blank" rel="noopener" aria-label="Adnan Zaka on Facebook"><i class="bi bi-facebook"></i></a>
                   <a href="https://www.instagram.com/adnan.zaka.54/" target="_blank" rel="noopener" aria-label="Adnan Zaka on Instagram"><i class="bi bi-instagram"></i></a>
@@ -274,12 +274,12 @@ include __DIR__ . '/includes/header.php';
             </div>
           </div><!-- End Team Member -->
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="pic"><picture><source srcset="assets/img/team/team-2.webp" type="image/webp"><img src="assets/img/team/team-2.png" class="img-fluid" alt="Mudassar Abbas" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
                 <h4 aria-level="3">Mudassar Abbas</h4>
-                <span>Product Manager</span>
+                <span>Co-Founder &amp; Chief Technology Officer (CTO)</span>
                 <div class="social">
                   <a href="https://www.facebook.com/mudassar.abbas.9277" target="_blank" rel="noopener" aria-label="Mudassar Abbas on Facebook"><i class="bi bi-facebook"></i></a>
                   <a href="https://github.com/abbas2157" target="_blank" rel="noopener" aria-label="Mudassar Abbas on GitHub"><i class="bi bi-github"></i></a>
@@ -289,16 +289,28 @@ include __DIR__ . '/includes/header.php';
             </div>
           </div><!-- End Team Member -->
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><picture><source srcset="assets/img/team/team-3.webp" type="image/webp"><img src="assets/img/team/team-3.png" class="img-fluid" alt="Muhammad Javed Rafique" width="500" height="500" loading="lazy" decoding="async"></picture></div>
+              <div class="pic"><picture><source srcset="assets/img/team/team-3.webp" type="image/webp"><img src="assets/img/team/team-3.png" class="img-fluid" alt="Muhammad Javed" width="500" height="500" loading="lazy" decoding="async"></picture></div>
               <div class="member-info">
-                <h4 aria-level="3">Muhammad Javed Rafique</h4>
-                <span>Mobile App Manager</span>
+                <h4 aria-level="3">Muhammad Javed</h4>
+                <span>Chief Product &amp; Application Development Officer (CPADO)</span>
                 <div class="social">
-                  <a href="https://github.com/Muhammadjaved7209" target="_blank" rel="noopener" aria-label="Muhammad Javed Rafique on GitHub"><i class="bi bi-github"></i></a>
-                  <a href="https://www.linkedin.com/in/muhammad-javed-rafique-902672216" target="_blank" rel="noopener" aria-label="Muhammad Javed Rafique on LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://github.com/Muhammadjaved7209" target="_blank" rel="noopener" aria-label="Muhammad Javed on GitHub"><i class="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/muhammad-javed-rafique-902672216" target="_blank" rel="noopener" aria-label="Muhammad Javed on LinkedIn"><i class="bi bi-linkedin"></i></a>
                 </div>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="pic member-pic-placeholder d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="member-info">
+                <h4 aria-level="3">Muhammad Ahmed Chaudhary</h4>
+                <span>Chief Operating Officer (C.O.O) &amp; Co-Founder</span>
               </div>
             </div>
           </div><!-- End Team Member -->

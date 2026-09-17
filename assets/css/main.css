@@ -1475,6 +1475,16 @@ section,
   margin-bottom: 50px;
 }
 
+.team .member .pic.member-pic-placeholder {
+  aspect-ratio: 1 / 1;
+  background-color: color-mix(in srgb, var(--default-color), transparent 92%);
+}
+
+.team .member .pic.member-pic-placeholder i {
+  font-size: 6rem;
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
 .team .member .member-info {
   background-color: var(--surface-color);
   color: color-mix(in srgb, var(--default-color), transparent 20%);
