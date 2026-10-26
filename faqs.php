@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Atom Services FAQs: Atomshop, AtomPay, Mark Attendance and GITEX 2026';
 $metaDescription = 'Answers about Atom Services, Atomshop.pk, AtomPay, Mark Attendance, KDP Score, Publishing Guru and GITEX Global 2026.';
-$canonicalPath = 'faqs.php';
+$canonicalPath = 'faqs';
 
 require_once __DIR__ . '/includes/site.php';
 
@@ -10,7 +10,7 @@ $faqs = [
   'company' => ['About the company', [
     ['What does Atom Services do?', 'Atom Services (Pvt) Ltd builds AI-powered product financing and the software around it. Our flagship is Atomshop.pk, an installment shopping ecosystem in Pakistan. We also run Mark Attendance, KDP Score and Publishing Guru.'],
     ['Where are you based?', 'Our team and operations are in Lahore, Pakistan. We also have a US entity, Atom Services LLC, in Sheridan, Wyoming.'],
-    ['Do you build software for other companies?', 'Yes. The same team offers custom software, Android and iOS apps, SaaS platforms and UI/UX design. See <a href="services.php">our services</a> or <a href="contact.php">contact us</a> with a short brief.'],
+    ['Do you build software for other companies?', 'Yes. The same team offers custom software, Android and iOS apps, SaaS platforms and UI/UX design. See <a href="services">our services</a> or <a href="contact">contact us</a> with a short brief.'],
     ['Are you hiring?', 'We hire engineers, designers and growth roles from time to time. Email your CV to <a href="mailto:info@atomservices.org?subject=Careers">info@atomservices.org</a> with "Careers" in the subject.'],
   ]],
   'atomshop' => ['Atomshop.pk and AtomPay', [
@@ -36,7 +36,7 @@ $faqs = [
     ['Who should meet you?', 'Investors in embedded finance and BNPL, brands and retailers who want to sell on installments, distribution partners for Mark Attendance in the GCC, and publishers scaling Amazon KDP catalogues.'],
   ]],
   'privacy' => ['Data and privacy', [
-    ['How do you handle personal data?', 'We collect only what each service needs and use it for that service. Read our <a href="privacy-policy.php">privacy policy</a> for details.'],
+    ['How do you handle personal data?', 'We collect only what each service needs and use it for that service. Read our <a href="privacy-policy">privacy policy</a> for details.'],
     ['How are CNIC and face data protected?', 'Identity documents and biometric templates are encrypted, access is limited to staff who need it, and they are used only for verification and attendance. Each product\'s own privacy policy explains this in detail.'],
   ]],
 ];
@@ -57,7 +57,7 @@ include __DIR__ . '/includes/header.php';
       <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">FAQs</span></nav>
       <span class="eyebrow">Help centre</span>
       <h1>Frequently asked questions.</h1>
-      <p class="hero-lede">Answers about Atom Services, our products and GITEX Global 2026. Can't find what you need? <a href="contact.php">Contact us</a>.</p>
+      <p class="hero-lede">Answers about Atom Services, our products and GITEX Global 2026. Can't find what you need? <a href="contact">Contact us</a>.</p>
     </div>
   </section>
 

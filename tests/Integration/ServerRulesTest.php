@@ -31,7 +31,7 @@ final class ServerRulesTest extends HttpTestCase
     foreach (['portfolio-details.php', 'service-details.php', 'sarter-page.php'] as $old) {
       $r = self::http($old);
       $this->assertSame(301, $r['status'], $old);
-      $this->assertStringEndsWith('/services.php', $r['redirect']);
+      $this->assertStringEndsWith('/services', $r['redirect']);
     }
   }
 
@@ -45,6 +45,41 @@ final class ServerRulesTest extends HttpTestCase
     $r = self::http('index.html');
     $this->assertSame(301, $r['status']);
     $this->assertSame(self::base() . '/', $r['redirect']); // site root, locally or live
+  }
+
+  public static function cleanPages(): array
+  {
+    return array_map(fn($p) => [$p], ['services', 'about', 'contact', 'faqs', 'privacy-policy', 'terms']);
+  }
+
+  #[DataProvider('cleanPages')]
+  public function testCleanUrlServesThePage(string $page): void
+  {
+    $r = self::http($page);
+    $this->assertSame(200, $r['status'], "/$page");
+    $this->assertStringContainsString('<link rel="canonical" href="' . absolute_url($page) . '">', $r['body']);
+  }
+
+  #[DataProvider('cleanPages')]
+  public function testPhpUrlRedirectsToCleanUrlKeepingQuery(string $page): void
+  {
+    $r = self::http("$page.php?form_status=ok");
+    $this->assertSame(301, $r['status'], "/$page.php");
+    $this->assertSame(self::base() . "/$page?form_status=ok", $r['redirect']);
+  }
+
+  public function testIndexPhpRedirectsToSiteRoot(): void
+  {
+    $r = self::http('index.php');
+    $this->assertSame(301, $r['status']);
+    $this->assertSame(self::base() . '/', $r['redirect']);
+  }
+
+  public function testFormHandlerIsNeverRedirected(): void
+  {
+    // "contact.php" inside forms/ must not be caught by the clean-URL redirect, or every form breaks.
+    $this->assertSame(405, self::http('forms/contact.php')['status']);
+    $this->assertSame(422, self::http('forms/contact.php', 'POST', ['form' => 'meeting'], false, ['Accept: application/json'])['status']);
   }
 
   public function testUnknownPageGetsFriendly404(): void

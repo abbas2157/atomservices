@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'About Atom Services: AI-powered product financing from Lahore';
 $metaDescription = 'Atom Services (Pvt) Ltd is a Lahore-based technology company building Atomshop.pk, AtomPay, Mark Attendance, KDP Score and Publishing Guru.';
-$canonicalPath = 'about.php';
+$canonicalPath = 'about';
 
 require_once __DIR__ . '/includes/site.php';
 
@@ -35,7 +35,7 @@ include __DIR__ . '/includes/header.php';
       <div class="prose">
         <p>Atom Services (Pvt) Ltd is a Lahore-based technology company. Our flagship, <strong>Atomshop.pk</strong>, connects shoppers, local sellers, brands and financing on one platform, so a customer can tell us what they want and what they can pay each month and get a plan in seconds.</p>
         <p>We build every product in-house: the consumer apps, the seller and brand tools, and the ATOM Intelligence layer that decides limits, routes orders to verified sellers nearby and reminds customers before each payment is due.</p>
-        <p>The same team also runs <strong>Mark Attendance</strong>, a face recognition attendance system for Pakistani workplaces, and two Amazon KDP publishing businesses, <strong>KDP Score</strong> and <strong>Publishing Guru</strong>. We take on client projects too: see <a href="services.php">our services</a>.</p>
+        <p>The same team also runs <strong>Mark Attendance</strong>, a face recognition attendance system for Pakistani workplaces, and two Amazon KDP publishing businesses, <strong>KDP Score</strong> and <strong>Publishing Guru</strong>. We take on client projects too: see <a href="services">our services</a>.</p>
       </div>
     </div>
   </section>

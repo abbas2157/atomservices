@@ -14,7 +14,7 @@ include __DIR__ . '/includes/header.php';
       <p class="hero-lede">It may have moved when we redesigned the site. Try one of these, or search the site.</p>
       <div class="hero-cta">
         <a class="btn btn-amber" href="./">Go to the homepage</a>
-        <a class="btn btn-ghost" href="services.php">Our services</a>
+        <a class="btn btn-ghost" href="services">Our services</a>
         <button class="btn btn-ghost" type="button" data-open-search>Search the site</button>
       </div>
     </div>

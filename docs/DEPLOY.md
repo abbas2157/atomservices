@@ -23,7 +23,7 @@ Contents:
 | Need | Notes |
 |---|---|
 | PHP 8.1 or newer | Tested on 8.2. Extensions: `pdo_mysql`, `mbstring`, `openssl` (standard on most hosts) |
-| Apache with `.htaccess` allowed | Modules: `mod_rewrite` (required), `mod_headers`, `mod_expires`, `mod_deflate`, `mod_alias` |
+| Apache with `.htaccess` allowed | Modules: `mod_rewrite` (required: clean URLs like `/about` and the security rules depend on it), `mod_headers`, `mod_expires`, `mod_deflate`, `mod_alias` |
 | MySQL or MariaDB | One database, two tables |
 | SMTP account | To send form notifications (host, port, username, password) |
 | SSL certificate | Let's Encrypt / cPanel AutoSSL is fine |
@@ -193,7 +193,8 @@ Work through this list; it takes about 15 minutes.
 - [ ] `https://atomservices.org` loads with the **padlock**, new design, no error text.
 - [ ] `http://atomservices.org` and `https://www.atomservices.org` both end up at `https://atomservices.org`.
 - [ ] Each page opens: Services, About, FAQs, Contact, Privacy policy, Terms (header and footer links).
-- [ ] `https://atomservices.org/about.html` redirects to `/about.php`; `/service-details.php` redirects to `/services.php`.
+- [ ] Pages have clean addresses: `https://atomservices.org/about`, `/services`, `/contact`, `/faqs`, `/privacy-policy`, `/terms`.
+- [ ] Old addresses redirect: `/about.php` and `/about.html` go to `/about`; `/service-details.php` goes to `/services`.
 - [ ] `https://atomservices.org/this-does-not-exist` shows the styled "We can't find that page" page.
 - [ ] Team photos and product logos show; the GITEX countdown shows a number.
 - [ ] On a **phone**: the menu button opens the menu, the WhatsApp button opens a chat with +1 646 726 0635.
@@ -246,7 +247,7 @@ preview appears.
 1. Open [Google Search Console](https://search.google.com/search-console) → **Add property** → *Domain* →
    `atomservices.org` → add the TXT record it gives you at your DNS provider → **Verify**.
 2. **Sitemaps** → enter `sitemap.xml` → **Submit**.
-3. **URL Inspection** → `https://atomservices.org/` → **Request indexing**. Repeat for `/services.php` and `/about.php`.
+3. **URL Inspection** → `https://atomservices.org/` → **Request indexing**. Repeat for `/services` and `/about`.
 
 New pages usually appear in search within a few days to two weeks.
 

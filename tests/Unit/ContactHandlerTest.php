@@ -289,9 +289,9 @@ final class ContactHandlerTest extends TestCase
   public function testRedirectUrlsForPlainFormPosts(): void
   {
     $this->assertSame('/?form_status=ok#meet', contact_redirect_url('meeting', 'ok'));
-    $this->assertSame('/atomservices/services.php?form_status=invalid#contact', contact_redirect_url('contact', 'invalid', '/atomservices/'));
+    $this->assertSame('/atomservices/services?form_status=invalid#contact', contact_redirect_url('contact', 'invalid', '/atomservices/'));
     $this->assertSame('/?form_status=error#meet', contact_redirect_url('https://evil.example', 'javascript:alert(1)'));
-    $this->assertSame('/contact.php?form_status=ok#message', contact_redirect_url('enquiry', 'ok'));
+    $this->assertSame('/contact?form_status=ok#message', contact_redirect_url('enquiry', 'ok'));
   }
 
   public function testStatusMessages(): void

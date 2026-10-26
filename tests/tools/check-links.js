@@ -4,7 +4,7 @@
 // reported as "unverifiable" instead of failing the run.
 
 const BASE = (process.env.BASE_URL || 'http://localhost/atomservices/').replace(/\/?$/, '/');
-const PAGES = ['', 'services.php', 'about.php', 'contact.php', 'faqs.php', 'privacy-policy.php', 'terms.php'];
+const PAGES = ['', 'services', 'about', 'contact', 'faqs', 'privacy-policy', 'terms'];
 const LIVE = 'https://atomservices.org';
 const BOT_BLOCKERS =/(^|\.)(linkedin\.com|facebook\.com)$/;
 

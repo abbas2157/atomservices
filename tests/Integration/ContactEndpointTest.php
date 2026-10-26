@@ -63,9 +63,9 @@ final class ContactEndpointTest extends HttpTestCase
   {
     $r = self::post(['form' => 'contact', 'name' => 'Bot', 'email' => 'b@example.com', 'website' => 'spam'], []);
     $this->assertSame(303, $r['status']);
-    $this->assertStringEndsWith('/services.php?form_status=ok#contact', $r['redirect']);
+    $this->assertStringEndsWith('/services?form_status=ok#contact', $r['redirect']);
 
-    $msg = self::dom(self::http('services.php?form_status=ok')['body'])->query('//form//p[contains(@class, "form-msg")]')->item(0);
+    $msg = self::dom(self::http('services?form_status=ok')['body'])->query('//form//p[contains(@class, "form-msg")]')->item(0);
     $this->assertStringContainsString('ok', $msg->getAttribute('class'));
     $this->assertStringContainsString('reply by email', $msg->textContent);
   }
@@ -81,8 +81,8 @@ final class ContactEndpointTest extends HttpTestCase
   {
     $r = self::post(['form' => 'enquiry', 'name' => '', 'email' => ''], []);
     $this->assertSame(303, $r['status']);
-    $this->assertStringEndsWith('/contact.php?form_status=invalid#message', $r['redirect']);
-    $msg = self::dom(self::http('contact.php?form_status=invalid')['body'])->query('//form//p[contains(@class, "form-msg")]')->item(0);
+    $this->assertStringEndsWith('/contact?form_status=invalid#message', $r['redirect']);
+    $msg = self::dom(self::http('contact?form_status=invalid')['body'])->query('//form//p[contains(@class, "form-msg")]')->item(0);
     $this->assertStringContainsString('short message', $msg->textContent);
   }
 

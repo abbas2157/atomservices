@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Contact Atom Services: Lahore, Pakistan and Wyoming, USA';
 $metaDescription = 'Contact Atom Services (Pvt) Ltd in Lahore and Atom Services LLC in the US. Email info@atomservices.org, message us on WhatsApp or use the form.';
-$canonicalPath = 'contact.php';
+$canonicalPath = 'contact';
 
 require_once __DIR__ . '/includes/site.php';
 require_once __DIR__ . '/includes/form_parts.php';
@@ -78,7 +78,7 @@ include __DIR__ . '/includes/header.php';
           <div class="field"><label for="e-message">Message <abbr title="required">*</abbr></label><textarea id="e-message" name="message" required minlength="10" maxlength="5000" placeholder="How can we help?"></textarea></div>
           <button class="btn btn-amber" type="submit"><span class="spinner" aria-hidden="true"></span>Send message</button>
           <?php echo form_status('enquiry'); ?>
-          <p class="form-alt">By sending this form you agree to our <a href="privacy-policy.php">privacy policy</a>.</p>
+          <p class="form-alt">By sending this form you agree to our <a href="privacy-policy">privacy policy</a>.</p>
         </form>
         <?php echo form_success('Message sent', 'Send another message'); ?>
       </div>

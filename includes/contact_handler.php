@@ -193,9 +193,9 @@ function contact_redirect_url(string $form, string $status, string $siteRoot = '
   $status = in_array($status, ['ok', 'invalid', 'error'], true) ? $status : 'error';
   switch ($form) {
     case 'contact':
-      return $siteRoot . 'services.php?form_status=' . $status . '#contact';
+      return $siteRoot . 'services?form_status=' . $status . '#contact';
     case 'enquiry':
-      return $siteRoot . 'contact.php?form_status=' . $status . '#message';
+      return $siteRoot . 'contact?form_status=' . $status . '#message';
     default:
       return $siteRoot . '?form_status=' . $status . '#meet';
   }

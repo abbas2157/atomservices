@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }, testInfo) => {
 });
 
 test.describe('page load', () => {
-  for (const path of ['./', 'services.php']) {
+  for (const path of ['./', 'services']) {
     test(`${path} loads fast, without errors or sideways scroll`, async ({ page }, testInfo) => {
       await page.goto(path, { waitUntil: 'load' });
       // Use the browser's own Navigation Timing, not wall-clock time, so browser start-up isn't counted.
@@ -89,7 +89,7 @@ test.describe('navigation', () => {
   test('services link goes to the services page and back home', async ({ page }) => {
     await page.goto('./');
     await page.locator('.svc').getByRole('link', { name: 'Mobile apps' }).click();
-    await expect(page).toHaveURL(/services\.php#mobile-apps$/);
+    await expect(page).toHaveURL(/services#mobile-apps$/);
     await expect(page.locator('h1')).toContainText('Software development services');
     await page.locator('.crumbs').getByRole('link', { name: 'Home' }).click();
     await expect(page.locator('h1')).toContainText('Pay in steps');
@@ -120,11 +120,11 @@ test.describe('search', () => {
     await input.fill('mobile app');
     await expect(results.first()).toContainText('Mobile app development');
     await input.press('Enter');
-    await expect(page).toHaveURL(/services\.php#mobile-apps$/);
+    await expect(page).toHaveURL(/services#mobile-apps$/);
   });
 
   test('shows a helpful empty state and closes with Escape', async ({ page }) => {
-    await page.goto('services.php');
+    await page.goto('services');
     await page.locator('[data-open-search]').first().click();
     await page.locator('#search-input').fill('zzzz');
     await expect(page.locator('.search-empty')).toContainText('No results');
@@ -238,7 +238,7 @@ test.describe('forms', () => {
       await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true,"message":"Thanks."}' });
     });
     await open(page, './?utm_source=newsletter');
-    await open(page, 'services.php#contact');
+    await open(page, 'services#contact');
     await page.locator('#c-name').fill('Ali');
     await page.locator('#c-email').fill('ali@example.com');
     await page.locator('#c-message').fill('We need an Android app for our drivers.');
@@ -252,7 +252,7 @@ test.describe('forms', () => {
       status: 422, contentType: 'application/json',
       body: JSON.stringify({ ok: false, message: 'Please fix the highlighted fields.', errors: { email: 'That address bounced.' } }),
     }));
-    await open(page, 'services.php#contact');
+    await open(page, 'services#contact');
     await page.locator('#c-name').fill('Ali');
     await page.locator('#c-email').fill('ali@example.com');
     await page.locator('#c-message').fill('A project description.');

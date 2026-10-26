@@ -9,12 +9,12 @@ final class PagesTest extends HttpTestCase
   {
     return [
       'home' => [''],
-      'services' => ['services.php'],
-      'about' => ['about.php'],
-      'contact' => ['contact.php'],
-      'faqs' => ['faqs.php'],
-      'privacy' => ['privacy-policy.php'],
-      'terms' => ['terms.php'],
+      'services' => ['services'],
+      'about' => ['about'],
+      'contact' => ['contact'],
+      'faqs' => ['faqs'],
+      'privacy' => ['privacy-policy'],
+      'terms' => ['terms'],
     ];
   }
 
@@ -142,9 +142,9 @@ final class PagesTest extends HttpTestCase
       $this->assertSame(200, $status, "Broken link on /$path: $url ($status)");
     }
 
-    // Anchors on other pages ("./#products", "services.php#saas") must exist there too.
+    // Anchors on other pages ("./#products", "services#saas") must exist there too.
     foreach ($x->query('//a/@href') as $attr) {
-      if (!preg_match('#^(\./|[a-z-]+\.php)\#(.+)$#', $attr->value, $m)) {
+      if (!preg_match('#^(\./|[a-z-]+)\#(.+)$#', $attr->value, $m)) {
         continue;
       }
       $page = $m[1] === './' ? '' : $m[1];
@@ -224,7 +224,7 @@ final class PagesTest extends HttpTestCase
   {
     $x = self::dom(self::http($path)['body']);
     $current = $x->query('//nav[@id="site-nav"]/a[@aria-current="page"]');
-    if (in_array($path, ['services.php', 'about.php', 'faqs.php', 'contact.php'], true)) {
+    if (in_array($path, ['services', 'about', 'faqs', 'contact'], true)) {
       $this->assertSame(1, $current->length);
       $this->assertSame($path, $current->item(0)->getAttribute('href'));
     } else {
@@ -235,14 +235,14 @@ final class PagesTest extends HttpTestCase
   public function testFooterLinksToEveryPage(): void
   {
     $x = self::dom(self::http('')['body']);
-    foreach (['about.php', 'services.php', 'contact.php', 'faqs.php', 'privacy-policy.php', 'terms.php'] as $page) {
+    foreach (['about', 'services', 'contact', 'faqs', 'privacy-policy', 'terms'] as $page) {
       $this->assertGreaterThan(0, $x->query("//footer//a[@href='$page']")->length, "Footer has no link to $page");
     }
   }
 
   public function testUnconfirmedCompanyDetailsAreHidden(): void
   {
-    $about = self::http('about.php')['body'];
+    $about = self::http('about')['body'];
     $this->assertStringContainsString(COMPANY_OFFICE, $about);
     $this->assertSame(COMPANY_SECP_NO !== null, str_contains($about, 'SECP registration'));
     $this->assertSame(COMPANY_NTN !== null, str_contains($about, 'National Tax Number'));
@@ -250,7 +250,7 @@ final class PagesTest extends HttpTestCase
 
   public function testFaqStructuredDataMatchesQuestions(): void
   {
-    $x = self::dom(self::http('faqs.php')['body']);
+    $x = self::dom(self::http('faqs')['body']);
     $schema = null;
     foreach ($x->query('//script[@type="application/ld+json"]') as $s) {
       $json = json_decode($s->textContent, true);

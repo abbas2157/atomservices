@@ -27,13 +27,27 @@ Options -Indexes
   RewriteRule ^(composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml(\.dist)?|playwright\.config\.js|Readme\.txt|forms/Readme\.txt)$ - [F,L]
   # Hidden files (.git, .env...) but not .well-known, which SSL certificate issuers need.
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+  # Clean URLs: /about is served by about.php. Requests that still use .php (old links, bookmarks,
+  # search results) are redirected to the clean URL; the query string is kept. THE_REQUEST is the
+  # original request line, so the internal rewrite below can't loop back into this redirect.
+  # The RewriteRule patterns only match files at the top of the site, so forms/contact.php (the form
+  # handler) is never redirected.
+  RewriteCond %{THE_REQUEST} \s([^?\s]*/)(services|about|contact|faqs|privacy-policy|terms)\.php[?\s] [NC]
+  RewriteRule ^(services|about|contact|faqs|privacy-policy|terms)\.php$ %1%2 [R=301,L]
+  RewriteCond %{THE_REQUEST} \s([^?\s]*/)index\.php[?\s] [NC]
+  RewriteRule ^index\.php$ %1 [R=301,L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(services|about|contact|faqs|privacy-policy|terms)$ $1.php [L]
 </IfModule>
 
 # Old template pages were removed in the redesign
 <IfModule mod_alias.c>
-  RedirectMatch 301 ^(.*)/(portfolio-details|service-details|sarter-page)\.php$ $1/services.php
-  # Static-design URLs (about.html etc.) go to the PHP pages
-  RedirectMatch 301 ^(.*)/(about|contact|faqs|privacy-policy|terms|services)\.html$ $1/$2.php
+  RedirectMatch 301 ^(.*)/(portfolio-details|service-details|sarter-page)\.php$ $1/services
+  # Static-design URLs (about.html etc.) go to the clean URLs
+  RedirectMatch 301 ^(.*)/(about|contact|faqs|privacy-policy|terms|services)\.html$ $1/$2
   RedirectMatch 301 ^(.*)/index\.html$ $1/
 </IfModule>
 

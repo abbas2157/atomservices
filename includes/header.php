@@ -99,11 +99,11 @@ $organization = [
       <nav class="nav" id="site-nav" aria-label="Main">
         <a href="<?php echo $home; ?>#products">Products</a>
 <?php foreach (['services.php' => 'Services'] as $file => $label): ?>
-        <a href="<?php echo $file; ?>"<?php echo $currentPage === $file ? ' aria-current="page"' : ''; ?>><?php echo $label; ?></a>
+        <a href="<?php echo basename($file, '.php'); ?>"<?php echo $currentPage === $file ? ' aria-current="page"' : ''; ?>><?php echo $label; ?></a>
 <?php endforeach; ?>
         <a href="<?php echo $home; ?>#gitex">GITEX 2026</a>
 <?php foreach (['about.php' => 'About', 'faqs.php' => 'FAQs', 'contact.php' => 'Contact'] as $file => $label): ?>
-        <a href="<?php echo $file; ?>"<?php echo $currentPage === $file ? ' aria-current="page"' : ''; ?>><?php echo $label; ?></a>
+        <a href="<?php echo basename($file, '.php'); ?>"<?php echo $currentPage === $file ? ' aria-current="page"' : ''; ?>><?php echo $label; ?></a>
 <?php endforeach; ?>
       </nav>
       <button class="icon-btn" type="button" data-open-search aria-label="Search the site (press /)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>

@@ -11,7 +11,7 @@ async function open(page, path) {
   await page.evaluate(() => document.fonts.ready);
 }
 
-const PAGES = ['about.php', 'contact.php', 'faqs.php', 'privacy-policy.php', 'terms.php'];
+const PAGES = ['about', 'contact', 'faqs', 'privacy-policy', 'terms'];
 
 for (const path of PAGES) {
   test(`${path} loads fast, without errors, and fits the screen`, async ({ page }) => {
@@ -32,7 +32,7 @@ for (const path of PAGES) {
 }
 
 test('every logo and photo on the page loads', async ({ page }) => {
-  for (const path of ['./', 'about.php', 'contact.php']) {
+  for (const path of ['./', 'about', 'contact']) {
     await open(page, path);
     const imgs = page.locator('img');
     const n = await imgs.count();
@@ -46,7 +46,7 @@ test('every logo and photo on the page loads', async ({ page }) => {
 
 test('main navigation reaches About, FAQs and Contact', async ({ page }, testInfo) => {
   await open(page, './');
-  for (const [label, url, heading] of [['About', /about\.php$/, 'Smarter finance'], ['FAQs', /faqs\.php$/, 'Frequently asked'], ['Contact', /contact\.php$/, 'Talk to the right team']]) {
+  for (const [label, url, heading] of [['About', /about$/, 'Smarter finance'], ['FAQs', /faqs$/, 'Frequently asked'], ['Contact', /contact$/, 'Talk to the right team']]) {
     if (isMobile(testInfo)) await page.locator('.menu-toggle').click();
     await page.locator('#site-nav').getByRole('link', { name: label, exact: true }).click();
     await expect(page).toHaveURL(url);
@@ -66,7 +66,7 @@ test('footer links reach the legal pages', async ({ page }) => {
 });
 
 test('FAQ answers open and close, and topic links jump to sections', async ({ page }, testInfo) => {
-  await open(page, 'faqs.php');
+  await open(page, 'faqs');
   const q = page.locator('details').filter({ hasText: 'What is AtomPay?' });
   const answer = q.locator('p');
   await expect(answer).toBeHidden();
@@ -77,7 +77,7 @@ test('FAQ answers open and close, and topic links jump to sections', async ({ pa
   await expect(answer).toBeHidden();
   if (!isMobile(testInfo)) { // the topic list is hidden on phones
     await page.locator('.toc').getByRole('link', { name: 'GITEX Global 2026' }).click();
-    await expect(page).toHaveURL(/faqs\.php#gitex$/);
+    await expect(page).toHaveURL(/faqs#gitex$/);
     await expect(page.locator('#gitex h2')).toBeInViewport();
   }
 });
@@ -88,7 +88,7 @@ test('contact page form shows errors, then a success state', async ({ page }) =>
     posted = route.request().postData() || '';
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, message: 'Thanks. We have your message and will reply by email.' }) });
   });
-  await open(page, 'contact.php');
+  await open(page, 'contact');
   const form = page.locator('#message form');
   await page.locator('#e-name').fill('Zara');
   await page.locator('#e-email').fill('zara@example.com');
@@ -106,7 +106,7 @@ test('contact page form shows errors, then a success state', async ({ page }) =>
 
 test('contact page copy button and WhatsApp links work', async ({ page, context, browserName }) => {
   if (browserName === 'chromium') await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await open(page, 'contact.php');
+  await open(page, 'contact');
   const copy = page.locator('.ccard [data-copy]');
   // Record every label change: "Copied" only shows for 1.8 s, which a busy test machine can miss when polling.
   await copy.evaluate((btn) => {
@@ -126,19 +126,19 @@ test('contact page copy button and WhatsApp links work', async ({ page, context,
 
 test('old .html links from the design redirect to the live pages', async ({ page }) => {
   await page.goto('about.html');
-  await expect(page).toHaveURL(/about\.php$/);
+  await expect(page).toHaveURL(/about$/);
   await expect(page.locator('h1')).toContainText('Smarter finance');
 });
 
 test('cookie notice stays dismissed across pages', async ({ page }) => {
-  await open(page, 'about.php');
+  await open(page, 'about');
   await page.locator('#cookie-banner button').click();
-  await open(page, 'faqs.php');
+  await open(page, 'faqs');
   await expect(page.locator('#cookie-banner')).toBeHidden();
 });
 
 test('team photos are shown whole (square, not cropped)', async ({ page }) => {
-  await open(page, 'about.php');
+  await open(page, 'about');
   const portraits = page.locator('.leader .portrait');
   await expect(portraits).toHaveCount(5);
   for (let i = 0; i < 5; i++) {

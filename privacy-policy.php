@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Privacy Policy | Atom Services';
 $metaDescription = 'How Atom Services (Pvt) Ltd collects, uses and protects personal data on atomservices.org.';
-$canonicalPath = 'privacy-policy.php';
+$canonicalPath = 'privacy-policy';
 
 require_once __DIR__ . '/includes/site.php';
 

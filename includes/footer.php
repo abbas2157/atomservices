@@ -39,12 +39,12 @@
     <div>
       <h2 class="foot-title">Company</h2>
       <ul>
-        <li><a href="about.php">About us</a></li>
-        <li><a href="services.php">Services</a></li>
-        <li><a href="contact.php">Contact us</a></li>
-        <li><a href="faqs.php">FAQs</a></li>
-        <li><a href="privacy-policy.php">Privacy policy</a></li>
-        <li><a href="terms.php">Terms of use</a></li>
+        <li><a href="about">About us</a></li>
+        <li><a href="services">Services</a></li>
+        <li><a href="contact">Contact us</a></li>
+        <li><a href="faqs">FAQs</a></li>
+        <li><a href="privacy-policy">Privacy policy</a></li>
+        <li><a href="terms">Terms of use</a></li>
       </ul>
     </div>
     <div class="legal"><span>© <?php echo date('Y'); ?> Atom Services (Pvt) Ltd. All rights reserved.</span><span><a href="https://www.linkedin.com/company/atomservicesofficial/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.facebook.com/AtomServicesOfficial/" target="_blank" rel="noopener">Facebook</a></span></div>

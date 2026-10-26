@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Terms of Use | Atom Services';
 $metaDescription = 'The terms for using atomservices.org, the company website of Atom Services (Pvt) Ltd, Lahore: content, intellectual property, acceptable use and liability.';
-$canonicalPath = 'terms.php';
+$canonicalPath = 'terms';
 
 require_once __DIR__ . '/includes/site.php';
 
@@ -65,7 +65,7 @@ include __DIR__ . '/includes/header.php';
         <p>These terms are governed by the laws of Pakistan, and the courts at Lahore have jurisdiction, unless the law of your country requires otherwise.</p>
 
         <h2 id="changes">8. Changes and contact</h2>
-        <p>We may update these terms; the effective date shows the latest version. Questions: <a href="mailto:<?php echo CONTACT_EMAIL; ?>"><?php echo CONTACT_EMAIL; ?></a>. See also our <a href="privacy-policy.php">privacy policy</a>.</p>
+        <p>We may update these terms; the effective date shows the latest version. Questions: <a href="mailto:<?php echo CONTACT_EMAIL; ?>"><?php echo CONTACT_EMAIL; ?></a>. See also our <a href="privacy-policy">privacy policy</a>.</p>
       </article>
     </div>
   </section>

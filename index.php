@@ -211,12 +211,12 @@ include __DIR__ . '/includes/header.php';
         <p>The team that ships Atomshop and Mark Attendance also takes on client projects.</p>
       </div>
       <div class="svc">
-        <div><h3><a href="services.php#custom-software">Custom software</a></h3><p>Business systems built to scale.</p></div>
-        <div><h3><a href="services.php#mobile-apps">Mobile apps</a></h3><p>Android and iOS apps built for performance.</p></div>
-        <div><h3><a href="services.php#saas">SaaS platforms</a></h3><p>Cloud products, launch-ready.</p></div>
-        <div><h3><a href="services.php#ui-ux">UI/UX design</a></h3><p>User-centred digital experiences.</p></div>
+        <div><h3><a href="services#custom-software">Custom software</a></h3><p>Business systems built to scale.</p></div>
+        <div><h3><a href="services#mobile-apps">Mobile apps</a></h3><p>Android and iOS apps built for performance.</p></div>
+        <div><h3><a href="services#saas">SaaS platforms</a></h3><p>Cloud products, launch-ready.</p></div>
+        <div><h3><a href="services#ui-ux">UI/UX design</a></h3><p>User-centred digital experiences.</p></div>
       </div>
-      <a class="text-link" href="services.php">See how we work on client projects &rarr;</a>
+      <a class="text-link" href="services">See how we work on client projects &rarr;</a>
     </div>
   </section>
 

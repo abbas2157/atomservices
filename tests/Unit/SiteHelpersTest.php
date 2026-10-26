@@ -48,7 +48,7 @@ final class SiteHelpersTest extends TestCase
   public function testAbsoluteUrl(): void
   {
     $this->assertSame('https://atomservices.org/', absolute_url(''));
-    $this->assertSame('https://atomservices.org/services.php', absolute_url('/services.php'));
+    $this->assertSame('https://atomservices.org/services', absolute_url('/services'));
   }
 
   public function testSearchIndexEntriesAreComplete(): void
@@ -71,7 +71,9 @@ final class SiteHelpersTest extends TestCase
   {
     // Anchors are checked against the rendered pages in PagesTest::testSearchIndexAnchorsExist.
     foreach (search_index('') as $item) {
-      $page = explode('#', $item['url'], 2)[0] ?: 'index.php';
+      // URLs are clean (services, about…); the page behind each one is <name>.php.
+      $url = explode('#', $item['url'], 2)[0];
+      $page = ($url === '' || $url === './' ? 'index' : $url) . '.php';
       $this->assertFileExists(__DIR__ . '/../../' . $page, "Search result '{$item['title']}' points at a missing page");
     }
   }

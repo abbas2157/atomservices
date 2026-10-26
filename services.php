@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Software Development Services: Custom Software, Mobile Apps, SaaS, UI/UX | Atom Services';
 $metaDescription = 'Custom software, Android and iOS apps, SaaS platforms and UI/UX design from the Lahore team that builds and runs Atomshop.pk and Mark Attendance. Tell us about your project.';
-$canonicalPath = 'services.php';
+$canonicalPath = 'services';
 
 require_once __DIR__ . '/includes/site.php';
 require_once __DIR__ . '/includes/form_parts.php';
@@ -135,7 +135,7 @@ include __DIR__ . '/includes/header.php';
             <div class="field"><label for="c-message">About your project <abbr title="required">*</abbr></label><textarea id="c-message" name="message" required minlength="10" maxlength="5000" placeholder="What are you building, and who is it for?"></textarea></div>
             <button class="btn btn-amber" type="submit"><span class="spinner" aria-hidden="true"></span>Send enquiry</button>
             <?php echo form_status('contact'); ?>
-            <p class="form-alt">By sending this form you agree to our <a href="privacy-policy.php">privacy policy</a>.</p>
+            <p class="form-alt">By sending this form you agree to our <a href="privacy-policy">privacy policy</a>.</p>
           </form>
           <?php echo form_success('Message sent', 'Send another message'); ?>
         </div>
