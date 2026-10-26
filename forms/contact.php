@@ -1,84 +1,70 @@
 <?php
 /**
- * Contact form handler.
- * Saves every submission to the database, then attempts to send a
- * notification email via SMTP. The DB save is authoritative — a submission
- * is treated as successful once it's stored, even if the email fails, so no
- * message is ever lost to an SMTP hiccup.
- * Always responds with HTTP 200; the body is either "OK" or an error message,
- * matching the contract expected by assets/vendor/php-email-form/validate.js.
+ * Contact / meeting-request endpoint.
+ * Validation and message composition live in includes/contact_handler.php; this file wires them to
+ * the database (authoritative) and SMTP (best effort). Responds with JSON:
+ *   {"ok": true, "message": "..."}                      on success
+ *   {"ok": false, "message": "...", "errors": {...}}     on validation (422) or server (500) failure
  */
 
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/contact_handler.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
-header('Content-Type: text/plain; charset=utf-8');
+header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  die('Invalid request method.');
+  http_response_code(405);
+  header('Allow: POST');
+  echo json_encode(['ok' => false, 'message' => 'Invalid request method.']);
+  exit;
 }
 
-$name = trim($_POST['name'] ?? '');
-$email = trim($_POST['email'] ?? '');
-$subject = trim($_POST['subject'] ?? '');
-$message = trim($_POST['message'] ?? '');
+[$status, $body] = contact_process(
+  $_POST,
+  function (string $name, string $email, string $subject, string $message): int {
+    $stmt = db()->prepare(
+      'INSERT INTO contact_messages (name, email, subject, message, ip_address) VALUES (?, ?, ?, ?, ?)'
+    );
+    $stmt->execute([$name, $email, $subject, $message, $_SERVER['REMOTE_ADDR'] ?? null]);
+    return (int) db()->lastInsertId();
+  },
+  function (string $name, string $email, string $subject, string $message): void {
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = SMTP_HOST;
+    $mail->Port = SMTP_PORT;
+    $mail->SMTPAuth = true;
+    $mail->Username = SMTP_USERNAME;
+    $mail->Password = SMTP_PASSWORD;
+    $mail->SMTPSecure = SMTP_ENCRYPTION;
+    $mail->CharSet = 'UTF-8';
 
-if ($name === '' || $email === '' || $subject === '' || $message === '') {
-  die('Please fill in all fields.');
-}
+    $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
+    foreach (mail_recipients(RECEIVING_EMAIL) as $to) {
+      $mail->addAddress($to);
+    }
+    $mail->addReplyTo($email, $name);
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  die('Please provide a valid email address.');
-}
-
-$name = str_replace(["\r", "\n"], '', $name);
-$subject = str_replace(["\r", "\n"], '', $subject);
-
-try {
-  $stmt = db()->prepare(
-    'INSERT INTO contact_messages (name, email, subject, message, ip_address) VALUES (?, ?, ?, ?, ?)'
-  );
-  $stmt->execute([$name, $email, $subject, $message, $_SERVER['REMOTE_ADDR'] ?? null]);
-  $messageId = (int) db()->lastInsertId();
-  $saved = true;
-} catch (PDOException $e) {
-  error_log('Contact form DB insert failed: ' . $e->getMessage());
-  $saved = false;
-}
-
-$emailSent = false;
-try {
-  $mail = new PHPMailer(true);
-  $mail->isSMTP();
-  $mail->Host = SMTP_HOST;
-  $mail->Port = SMTP_PORT;
-  $mail->SMTPAuth = true;
-  $mail->Username = SMTP_USERNAME;
-  $mail->Password = SMTP_PASSWORD;
-  $mail->SMTPSecure = SMTP_ENCRYPTION;
-
-  $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
-  $mail->addAddress(RECEIVING_EMAIL);
-  $mail->addReplyTo($email, $name);
-
-  $mail->Subject = 'New contact message: ' . $subject;
-  $mail->Body = "From: {$name}\nEmail: {$email}\n\nMessage:\n{$message}\n";
-
-  $mail->send();
-  $emailSent = true;
-
-  if ($saved) {
-    db()->prepare('UPDATE contact_messages SET email_sent = 1 WHERE id = ?')->execute([$messageId]);
+    $mail->Subject = $subject . ' (' . $name . ')';
+    $mail->Body = "From: {$name}\nEmail: {$email}\n\n{$message}\n";
+    $mail->send();
+  },
+  function (int $id): void {
+    db()->prepare('UPDATE contact_messages SET email_sent = 1 WHERE id = ?')->execute([$id]);
   }
-} catch (PHPMailerException $e) {
-  error_log('Contact form email send failed: ' . $mail->ErrorInfo);
+);
+
+// A plain form post (JavaScript not loaded yet, or disabled) goes back to the page with a status
+// the page can show, instead of leaving the visitor on a JSON response.
+if (strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') === false) {
+  header('Content-Type: text/html; charset=utf-8', true);
+  header('Location: ' . contact_redirect_url($_POST['form'] ?? '', $status === 200 ? 'ok' : ($status === 422 ? 'invalid' : 'error'), rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'])), '/\\') . '/'), true, 303);
+  exit;
 }
 
-if ($saved || $emailSent) {
-  echo 'OK';
-} else {
-  echo 'Message could not be sent. Please try again later.';
-}
+http_response_code($status);
+echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

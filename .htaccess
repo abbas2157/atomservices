@@ -1,8 +1,41 @@
 # Serve index.php for the bare directory
 DirectoryIndex index.php
+ErrorDocument 404 /404.php
+# Local XAMPP copy lives in a subfolder
+<If "%{REQUEST_URI} =~ m#^/atomservices/#">
+  ErrorDocument 404 /atomservices/404.php
+</If>
 
 # Prevent directory listing
 Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS on the live site (skipped on localhost so XAMPP keeps working over http).
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # One canonical host: www.atomservices.org -> atomservices.org
+  RewriteCond %{HTTP_HOST} ^www\.atomservices\.org$ [NC]
+  RewriteRule ^ https://atomservices.org%{REQUEST_URI} [L,R=301]
+
+  # Keep source, tests, tooling and dependencies off the web.
+  RewriteRule ^(vendor|node_modules|tests|tools|docs|database|includes)(/|$) - [F,L]
+  RewriteRule ^(composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml(\.dist)?|playwright\.config\.js|Readme\.txt|forms/Readme\.txt)$ - [F,L]
+  # Hidden files (.git, .env...) but not .well-known, which SSL certificate issuers need.
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
+</IfModule>
+
+# Old template pages were removed in the redesign
+<IfModule mod_alias.c>
+  RedirectMatch 301 ^(.*)/(portfolio-details|service-details|sarter-page)\.php$ $1/services.php
+  # Static-design URLs (about.html etc.) go to the PHP pages
+  RedirectMatch 301 ^(.*)/(about|contact|faqs|privacy-policy|terms|services)\.html$ $1/$2.php
+  RedirectMatch 301 ^(.*)/index\.html$ $1/
+</IfModule>
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
@@ -20,13 +53,20 @@ Options -Indexes
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
+  # CSS and JS are linked with ?v=<file time>, so long caching is safe.
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/xml "access plus 1 day"
 </IfModule>
 
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # Tell browsers to only use HTTPS from now on (sent only over HTTPS).
+  Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
 </IfModule>

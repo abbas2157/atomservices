@@ -19,5 +19,5 @@ define('SMTP_PASSWORD', 'your-smtp-password-or-app-password');
 define('SMTP_FROM_EMAIL', 'you@example.com');
 define('SMTP_FROM_NAME', 'Atom Services');
 
-// Where contact form / newsletter notifications are delivered to.
-define('RECEIVING_EMAIL', 'info@atomservices.org');
+// Where form notifications are delivered. Several addresses: separate with commas.
+define('RECEIVING_EMAIL', 'info@atomservices.org, abbas8156@gmail.com');

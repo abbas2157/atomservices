@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /forms/
+Allow: /
+
+Sitemap: https://atomservices.org/sitemap.xml
