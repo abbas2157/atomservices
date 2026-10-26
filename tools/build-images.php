@@ -18,13 +18,16 @@ $teamDir = "$root/assets/img/team";
 $originals = "$root/tools/originals";
 const TEAM_SIZE = 500;
 
-/** Centre-crop to a square and resize. */
+/**
+ * Crop to a square and resize. Wide photos are cropped from the centre; tall portraits keep the top
+ * (only 10% of the extra height is taken off the top) so heads are never cut off.
+ */
 function square(GdImage $src, int $size): GdImage {
   $w = imagesx($src);
   $h = imagesy($src);
   $side = min($w, $h);
   $out = imagecreatetruecolor($size, $size);
-  imagecopyresampled($out, $src, 0, 0, (int) (($w - $side) / 2), (int) (($h - $side) / 2), $size, $size, $side, $side);
+  imagecopyresampled($out, $src, 0, 0, (int) (($w - $side) / 2), (int) (($h - $side) * 0.1), $size, $size, $side, $side);
   return $out;
 }
 
