@@ -90,6 +90,34 @@ final class SiteHelpersTest extends TestCase
     $this->assertStringContainsString('url(#' . $ida[1] . ')', $a);
   }
 
+  public function testAppLinksRendersOnlyPublishedStores(): void
+  {
+    $html = app_links('atomshop', 'Atomshop');
+    $this->assertStringContainsString('href="https://play.google.com/store/apps/details?id=com.ecommerce.atomshop"', $html);
+    $this->assertStringContainsString('href="https://apps.apple.com/us/app/atomshop/id6744655747"', $html);
+    $this->assertStringContainsString('aria-label="Get Atomshop on Google Play"', $html);
+    $this->assertStringContainsString('aria-label="Get Atomshop on App Store"', $html);
+    $this->assertSame(2, substr_count($html, 'target="_blank" rel="noopener"'));
+    $this->assertSame('', app_links('no-such-app', 'Nothing'), 'Unknown apps render nothing');
+  }
+
+  public function testEveryAppLinkIsEmptyOrAStoreUrl(): void
+  {
+    foreach (APP_LINKS as $app => $stores) {
+      $this->assertSame(['android', 'ios'], array_keys($stores), "$app needs android and ios slots");
+      if ($stores['android'] !== null) {
+        $this->assertStringStartsWith('https://play.google.com/store/apps/details?id=', $stores['android'], $app);
+      }
+      if ($stores['ios'] !== null) {
+        $this->assertMatchesRegularExpression('#^https://apps\.apple\.com/.+/id\d+#', $stores['ios'], $app);
+      }
+      // An app with no links renders nothing, so no empty or dead buttons reach the page.
+      if ($stores['android'] === null && $stores['ios'] === null) {
+        $this->assertSame('', app_links($app, $app));
+      }
+    }
+  }
+
   public function testBrandImageHelper(): void
   {
     $html = brand_img('atompay-mark', 'AtomPay logo', 'x');
@@ -97,6 +125,8 @@ final class SiteHelpersTest extends TestCase
     $this->assertStringContainsString('alt="AtomPay logo" width="160" height="160"', $html);
     $this->assertStringNotContainsString('aria-hidden', $html);
     $this->assertStringContainsString('aria-hidden="true"', brand_img('atompay-mark', ''));
+    $this->assertStringContainsString('loading="lazy"', $html);
+    $this->assertStringNotContainsString('loading="lazy"', brand_img('atompay-mark', '', '', false), 'Above-the-fold logos must load immediately');
   }
 
   public function testEveryBrandLogoHasPngAndWebp(): void

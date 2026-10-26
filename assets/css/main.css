@@ -657,3 +657,19 @@ footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
 .leader .portrait, .leader.lead .portrait, .leader:not(.lead) .portrait, .leader:last-child:nth-child(odd) .portrait { aspect-ratio: 1 / 1; height: auto; min-height: 0; align-self: start; }
 @media (min-width: 961px) { .leader:not(.lead) { grid-template-columns: 200px 1fr; } }
 @media (max-width: 520px) { .leader .portrait, .leader:last-child:nth-child(odd) .portrait { align-self: center; } }
+
+/* Hero badges carry the AtomPay and Atom Seller marks */
+.toast i.toast-logo { background: #fff; border: 1px solid var(--line); }
+.toast-logo picture, .toast-logo img { display: block; width: 22px; height: 22px; }
+
+/* App store buttons */
+.app { display: flex; flex-direction: column; gap: 10px; }
+.app .app-links { margin-top: auto; padding-top: 6px; }
+.app-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.store-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 8px; background: var(--navy); color: var(--on-navy); font: 600 13px/1 var(--body); text-decoration: none; border: 1px solid transparent; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+.store-btn:hover { transform: translateY(-1px); border-color: var(--amber); background: var(--navy-2); }
+.store-btn svg { width: 16px; height: 16px; flex: none; }
+.get-app { display: grid; gap: 10px; margin-top: 14px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.flag-apps .store-btn { padding: 10px 14px; font-size: 14px; }
+.app .store-btn { padding: 7px 10px; font-size: 12.5px; gap: 6px; }
+.app .app-links { gap: 6px; }

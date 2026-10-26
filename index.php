@@ -27,7 +27,7 @@ include __DIR__ . '/includes/header.php';
       </div>
 
       <div class="plan-wrap">
-        <div class="toast t1" aria-hidden="true"><i>&#10003;</i><div><b>AtomPay limit approved</b><span>Example · verified with CNIC</span></div></div>
+        <div class="toast t1" aria-hidden="true"><i class="toast-logo"><?php echo brand_img('atompay-mark', '', '', false); ?></i><div><b>AtomPay limit approved</b><span>Example · verified with CNIC</span></div></div>
         <figure class="plan" aria-label="Example Atomshop installment plan">
           <div class="plan-head"><span>Example plan · LED TV</span><strong>Rs. 160,000</strong></div>
           <div>
@@ -45,7 +45,7 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="plan-foot"><span>Advance <b>Rs. 32,000</b></span><span>Plans <b>3–12 months</b></span></div>
         </figure>
-        <div class="toast t2" aria-hidden="true"><i>&#9679;</i><div><b>Verified seller nearby</b><span>Doorstep delivery in Lahore</span></div></div>
+        <div class="toast t2" aria-hidden="true"><i class="toast-logo"><?php echo brand_img('atomseller-mark', '', '', false); ?></i><div><b>Verified seller nearby</b><span>Doorstep delivery in Lahore</span></div></div>
       </div>
     </div>
   </section>
@@ -68,10 +68,10 @@ include __DIR__ . '/includes/header.php';
         <p>An order placed in one app reaches the other three immediately. Limits, routing and reminders are decided in one place.</p>
       </div>
       <div class="eco">
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomshop-mark', ''); ?></div><span class="app-who">For shoppers</span><h3>Atomshop</h3><p>Buy mobiles, laptops, bikes and appliances on installments, or custom-order anything from any shop, and track every payment.</p></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atompay-mark', ''); ?></div><span class="app-who">For financing</span><h3>AtomPay</h3><p>Verify once with CNIC and income to get a smart limit for eligible products: 3 months, no advance, 0% markup.</p></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomseller-mark', ''); ?></div><span class="app-who">For local sellers</span><h3>Atom Seller</h3><p>Leads from the seller's own area, deals, guarantors and collections, all from a phone.</p></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atombrand-mark', ''); ?></div><span class="app-who">For brands</span><h3>AtomBrand</h3><p>Brands run their storefront, stock, orders and bulk quotes, and sell across Pakistan without extra ad spend.</p></article>
+        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomshop-mark', ''); ?></div><span class="app-who">For shoppers</span><h3>Atomshop</h3><p>Buy mobiles, laptops, bikes and appliances on installments, or custom-order anything from any shop, and track every payment.</p><?php echo app_links('atomshop', 'Atomshop'); ?></article>
+        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atompay-mark', ''); ?></div><span class="app-who">For financing</span><h3>AtomPay</h3><p>Verify once with CNIC and income to get a smart limit for eligible products: 3 months, no advance, 0% markup.</p><?php echo app_links('atompay', 'AtomPay'); ?></article>
+        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomseller-mark', ''); ?></div><span class="app-who">For local sellers</span><h3>Atom Seller</h3><p>Leads from the seller's own area, deals, guarantors and collections, all from a phone.</p><?php echo app_links('atomseller', 'Atom Seller'); ?></article>
+        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atombrand-mark', ''); ?></div><span class="app-who">For brands</span><h3>AtomBrand</h3><p>Brands run their storefront, stock, orders and bulk quotes, and sell across Pakistan without extra ad spend.</p><?php echo app_links('atombrand', 'AtomBrand'); ?></article>
         <div class="core">
           <div class="core-copy"><h3>ATOM Intelligence</h3><p>One login and one data layer behind every app.</p></div>
           <div class="chips"><span class="chip">Smart Limit</span><span class="chip">Real-time routing</span><span class="chip">Timed reminders</span><span class="chip">Recovery Radar · next</span><span class="chip">KYC Vision · next</span></div>
@@ -96,6 +96,9 @@ include __DIR__ . '/includes/header.php';
           <p class="tagline">Pay in steps.</p>
           <p>Pakistan's installment shopping ecosystem. Customers pick any product and get a plan in seconds. AtomPay gives verified shoppers a spending limit, and a verified seller nearby delivers to their door.</p>
           <div class="flag-links"><a href="<?php echo e(product_url('https://atomshop.pk', 'products')); ?>" target="_blank" rel="noopener">Visit atomshop.pk</a><a href="<?php echo e(product_url('https://atompay.shop', 'products')); ?>" target="_blank" rel="noopener">Visit atompay.shop</a></div>
+<?php if ($flagApps = app_links('atomshop', 'Atomshop', 'flag-apps')): ?>
+          <div class="get-app"><span class="tier">Get the Atomshop app</span><?php echo $flagApps; ?></div>
+<?php endif; ?>
         </div>
         <dl class="flag-facts">
           <div><dt>Plans</dt><dd>3–12 months from 20% advance</dd></div>

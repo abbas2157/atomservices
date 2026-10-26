@@ -277,6 +277,23 @@ final class PagesTest extends HttpTestCase
     $this->assertSame(1, $x->query('//footer//a[contains(@class, "brand")]/*[local-name()="svg" and contains(@class, "brand-mark")]')->length, 'Footer logo missing');
   }
 
+  public function testHeroBadgesShowProductMarks(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    $this->assertSame(1, $x->query('//*[contains(@class,"toast t1")]//img[contains(@src,"atompay-mark")]')->length);
+    $this->assertSame(1, $x->query('//*[contains(@class,"toast t2")]//img[contains(@src,"atomseller-mark")]')->length);
+    $this->assertSame(0, $x->query('//*[contains(@class,"toast")]//img[@loading="lazy"]')->length, 'Hero badge logos are above the fold');
+  }
+
+  public function testAtomshopAppStoreButtonsOnHomepage(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    // Once in the Atomshop ecosystem card and once in the flagship card.
+    $this->assertSame(2, $x->query('//a[contains(@class,"store-btn")][@href="' . APP_LINKS['atomshop']['android'] . '"]')->length);
+    $this->assertSame(2, $x->query('//a[contains(@class,"store-btn")][@href="' . APP_LINKS['atomshop']['ios'] . '"]')->length);
+    $this->assertSame(0, $x->query('//a[contains(@class,"store-btn")][not(@href) or @href=""]')->length, 'No store button without a link');
+  }
+
   public function testProductLogosAreShown(): void
   {
     $home = self::http('')['body'];
