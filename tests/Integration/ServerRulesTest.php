@@ -44,7 +44,7 @@ final class ServerRulesTest extends HttpTestCase
     }
     $r = self::http('index.html');
     $this->assertSame(301, $r['status']);
-    $this->assertStringEndsWith('/atomservices/', $r['redirect']);
+    $this->assertSame(self::base() . '/', $r['redirect']); // site root, locally or live
   }
 
   public function testUnknownPageGetsFriendly404(): void

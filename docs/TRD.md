@@ -109,6 +109,8 @@ npm test             # js + php + e2e
 
 ## 7. Deployment checklist
 
+The full step-by-step manual is in [DEPLOY.md](DEPLOY.md). Summary:
+
 1. Upload the files. Do not upload `node_modules/`, `tests/`, `tools/originals/` or `.git/` (they are blocked
    by `.htaccess` anyway).
 2. On the server, run `composer install --no-dev` and create `includes/config.php` from `config.sample.php`.
