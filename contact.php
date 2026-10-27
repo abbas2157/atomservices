@@ -47,6 +47,12 @@ include __DIR__ . '/includes/header.php';
             <a href="<?php echo e(product_url('https://markattendance.io/contact', 'contact')); ?>" target="_blank" rel="noopener">markattendance.io/contact</a>
           </div>
           <div class="ccard">
+            <?php echo brand_img('kdp-score', 'KDP Score logo', 'ccard-logo'); ?>
+            <span class="tier">KDP niche research</span>
+            <h3>KDP Score</h3>
+            <a href="<?php echo e(product_url('https://kdpscore.com', 'contact')); ?>" target="_blank" rel="noopener">kdpscore.com</a>
+          </div>
+          <div class="ccard">
             <?php echo brand_img('publishing-guru', 'Publishing Guru logo', 'ccard-logo'); ?>
             <span class="tier">KDP publishing</span>
             <h3>Publishing Guru</h3>

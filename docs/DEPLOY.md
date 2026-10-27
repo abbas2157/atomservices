@@ -197,7 +197,7 @@ Work through this list; it takes about 15 minutes.
 - [ ] Old addresses redirect: `/about.php` and `/about.html` go to `/about`; `/service-details.php` goes to `/services`.
 - [ ] `https://atomservices.org/this-does-not-exist` shows the styled "We can't find that page" page.
 - [ ] Team photos and product logos show; the GITEX countdown shows a number.
-- [ ] On a **phone**: the menu button opens the menu, the WhatsApp button opens a chat with +1 646 726 0635.
+- [ ] On a **phone**: the menu button opens the menu, the WhatsApp button opens a chat with +92 304 1129252.
 - [ ] On an **iPhone in Safari**: open the homepage and contact page once and scroll through.
 
 ### 8.2 Private files are blocked

@@ -36,6 +36,12 @@ final class SiteHelpersTest extends TestCase
     $this->assertMatchesRegularExpression('/^\d{8,15}$/', WHATSAPP_NUMBER);
   }
 
+  public function testWhatsappUrlAcceptsAnotherNumber(): void
+  {
+    $this->assertSame('https://wa.me/923041129252?text=Hi', whatsapp_url('Hi', WHATSAPP_FLOAT_NUMBER));
+    $this->assertMatchesRegularExpression('/^\d{8,15}$/', WHATSAPP_FLOAT_NUMBER);
+  }
+
   public function testDaysUntilGitex(): void
   {
     $opens = strtotime(GITEX_OPENS_UTC);

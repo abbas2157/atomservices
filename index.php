@@ -131,7 +131,7 @@ include __DIR__ . '/includes/header.php';
         <span class="tier">Publishing · Find the niche, then publish it</span>
         <div class="pub-grid">
           <article class="pub-card">
-            <div class="pub-mark" aria-hidden="true">KS</div>
+            <?php echo brand_img('kdp-score', 'KDP Score logo', 'pub-logo'); ?>
             <h3>KDP Score</h3>
             <p class="tagline">Know the niche before you write.</p>
             <p>Amazon KDP niche intelligence, powered by AI.</p>

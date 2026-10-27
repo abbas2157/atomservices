@@ -156,7 +156,7 @@ test.describe('widgets', () => {
     const wa = page.locator('.wa-float');
     await expect(wa).toBeVisible();
     const href = await wa.getAttribute('href');
-    expect(href).toMatch(/^https:\/\/wa\.me\/16467260635\?text=.+/);
+    expect(href).toMatch(/^https:\/\/wa\.me\/923041129252\?text=.+/);
     await expect(wa).toHaveAttribute('target', '_blank');
   });
 

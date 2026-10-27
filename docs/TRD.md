@@ -1,6 +1,6 @@
 # Technical Requirements Document: atomservices.org
 
-Last updated: 2026-10-26, inner pages and logos added (launch: 2026-10-27)
+Last updated: 2026-10-27, KDP Score logo and contact card added, floating WhatsApp button number changed (launch: 2026-10-27)
 
 ## 1. Purpose and scope
 
@@ -37,7 +37,7 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | F5 | HTTPS padlock | `.htaccess` forces HTTPS (except localhost), canonical host, HSTS over HTTPS; `.well-known` left open for certificates; no mixed content | `ServerRulesTest::testWellKnownIsNotBlocked` | 🟡 SSL certificate must be active on the host |
 | F6 | Works in Chrome and Safari | Standard CSS, static font files (variable fonts rendered thin in WebKit), custom `select` styling | Full e2e suite in Chromium and WebKit, desktop and phone | ✅ (WebKit engine; real iPhone check recommended) |
 | F7 | No typos | Copy reviewed; British spelling used consistently (enrol, centred, catalogues) | Manual review | ✅ |
-| F8 | WhatsApp button | Floating button plus footer and form links → `wa.me/16467260635` with a prefilled message | `SiteHelpersTest::testWhatsappUrl…`; e2e "WhatsApp button" | ✅ |
+| F8 | WhatsApp button | Floating button → `wa.me/923041129252` (`WHATSAPP_FLOAT_NUMBER`); footer and form links → `wa.me/16467260635` (`WHATSAPP_NUMBER`); both with a prefilled message | `SiteHelpersTest::testWhatsappUrl…`; `PagesTest::testFloatingWhatsappButtonUsesItsOwnNumber`; e2e "WhatsApp button" | ✅ |
 | F9 | Submitted to Google | `sitemap.xml`, `robots.txt`, canonical URLs, Organization JSON-LD | `ServerRulesTest::testSitemap…`, `testRobots…` | 🟡 Submit the sitemap in Google Search Console |
 | F10 | Link previews | Open Graph and Twitter card tags, 1200×630 `og-image.png` | `PagesTest::testSeoAndLinkPreviewTags`, `testOgImageIsTheRightSize` | ✅ |
 | F11 | Payment page | Not part of this site (payments happen on atomshop.pk / atompay.shop) | — | ⛔ |
@@ -58,10 +58,10 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | F26 | Spam protection | Hidden honeypot field; bots get a fake success | Unit `testHoneypot…`, `testSpamLooks…`; integration | ✅ |
 | F27 | Contact data saved even if email fails | DB insert is authoritative; `email_sent` flag | Unit `testEmailFailureStillSucceedsWhenSaved`; `ContactDatabaseTest` against real MySQL | ✅ |
 | F28 | About page | Story, values, timeline with product marks, shared leadership section, company details (unconfirmed rows hidden), GITEX call to action | `PagesTest` (all checks), `testUnconfirmedCompanyDetailsAreHidden`; e2e nav and load tests | ✅ |
-| F29 | Contact page | Head office and per-product contact cards with logos and WhatsApp links, office hours, general enquiry form (`form=enquiry`, topic whitelist, message required) | Unit `testEnquiry…`; `ContactEndpointTest::testEnquiry…`, `testPlainEnquiryPost…`; JS unit; e2e "contact page form…", "contact page copy button…" | ✅ |
+| F29 | Contact page | Head office and per-product contact cards (Atomshop.pk, Mark Attendance, KDP Score, Publishing Guru) with logos and WhatsApp links, office hours, general enquiry form (`form=enquiry`, topic whitelist, message required) | Unit `testEnquiry…`; `ContactEndpointTest::testEnquiry…`, `testPlainEnquiryPost…`; `PagesTest::testKdpScoreContactCard`; JS unit; e2e "contact page form…", "contact page copy button…" | ✅ |
 | F30 | FAQs | Accordion (`<details>`), topic list, FAQPage structured data generated from the same list | `PagesTest::testFaqStructuredDataMatchesQuestions`; e2e "FAQ answers open and close…" | ✅ |
 | F31 | Privacy policy and terms | `privacy-policy.php`, `terms.php`, linked from the footer and every form. The privacy policy describes what the site actually does (no analytics, essential storage, UTM tags, IP stored with submissions) | `PagesTest`; e2e "footer links reach the legal pages" | 🟡 Legal review before relying on them |
-| F32 | Product logos | Atomshop, AtomPay, Atom Seller, AtomBrand, Mark Attendance and Publishing Guru logos on the homepage (including the AtomPay and Atom Seller marks on the hero badges, loaded eagerly), About and Contact, always on a white tile so they read in dark mode | `SiteHelpersTest::testBrandImageHelper`, `testEveryBrandLogoHasPngAndWebp`; `PagesTest::testProductLogosAreShown`; e2e "every logo and photo on the page loads" | ✅ |
+| F32 | Product logos | Atomshop, AtomPay, Atom Seller, AtomBrand, Mark Attendance, Publishing Guru and KDP Score logos on the homepage (including the AtomPay and Atom Seller marks on the hero badges, loaded eagerly), About and Contact, always on a white tile so they read in dark mode | `SiteHelpersTest::testBrandImageHelper`, `testEveryBrandLogoHasPngAndWebp`; `PagesTest::testProductLogosAreShown`; e2e "every logo and photo on the page loads" | ✅ |
 | F33 | Old design URLs | `about.html`, `contact.html`, `faqs.html`, `privacy-policy.html`, `terms.html` redirect (301) to the clean URLs; `index.html` to the site root | `ServerRulesTest::testDesignHtmlUrlsRedirectToPhpPages`; e2e | ✅ |
 | F39 | Clean URLs (no .php) | Pages live at `/services`, `/about`, `/contact`, `/faqs`, `/privacy-policy`, `/terms`. `.htaccess` serves each from its `.php` file and 301-redirects any `.php` address to the clean one, keeping the query string. Only top-level pages are matched, so the form handler `forms/contact.php` is never redirected. All links, canonical URLs, the sitemap, search results and form redirects use clean URLs | `ServerRulesTest::testCleanUrlServesThePage`, `testPhpUrlRedirectsToCleanUrlKeepingQuery`, `testIndexPhpRedirectsToSiteRoot`, `testFormHandlerIsNeverRedirected`; all page, link and e2e tests use clean URLs | ✅ |
 | F38 | Mobile app store links | "Google Play" and "App Store" buttons in each ecosystem card and in the Atomshop flagship card, driven by `APP_LINKS` in `includes/site.php`; an app with no links shows no buttons | Unit `testAppLinksRendersOnlyPublishedStores`, `testEveryAppLinkIsEmptyOrAStoreUrl`; `PagesTest::testAtomshopAppStoreButtonsOnHomepage`; link checker visits the store URLs | 🟡 Only Atomshop's links are known; AtomPay, Atom Seller and AtomBrand links needed |
@@ -128,8 +128,8 @@ The full step-by-step manual is in [DEPLOY.md](DEPLOY.md). Summary:
 - Company details not yet confirmed: SECP registration number, NTN and a Pakistan office phone. Set
   `COMPANY_SECP_NO`, `COMPANY_NTN` and `COMPANY_PK_PHONE` in `includes/site.php`; they then appear on the
   About page and in the footer. The office address shown is the one used on atomshop.pk.
-- No logo file exists yet for KDP Score; it uses a text mark. Add a source to `tools/brand-sources/` and run
-  `php tools/build-logos.php`.
+- KDP Score has no symbol-only mark (the magnifier handle overlaps the wordmark), so only the full logo is
+  used. A white-on-black version is kept in `tools/brand-sources/kdp-score-dark.jpg` but not built.
 - Photos for Muhammad Ahmed Chaudhary and Gulshair Murtaza are missing. Add `team-4.*` and `team-5.*` to
   `assets/img/team/` and run `php tools/build-images.php`; initials show until then.
 - GITEX hall and stand number: update in `index.php` when confirmed.

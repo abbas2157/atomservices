@@ -297,8 +297,24 @@ final class PagesTest extends HttpTestCase
   public function testProductLogosAreShown(): void
   {
     $home = self::http('')['body'];
-    foreach (['atomshop', 'atompay-mark', 'atomseller-mark', 'atombrand-mark', 'mark-attendance-mark', 'publishing-guru'] as $logo) {
+    foreach (['atomshop', 'atompay-mark', 'atomseller-mark', 'atombrand-mark', 'mark-attendance-mark', 'publishing-guru', 'kdp-score'] as $logo) {
       $this->assertStringContainsString("assets/img/brands/$logo.webp", $home, "$logo missing from homepage");
     }
+    $this->assertStringNotContainsString('pub-mark', $home, 'KDP Score text placeholder replaced by its logo');
+  }
+
+  public function testFloatingWhatsappButtonUsesItsOwnNumber(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    $this->assertSame(1, $x->query('//a[contains(@class,"wa-float")][starts-with(@href,"https://wa.me/' . WHATSAPP_FLOAT_NUMBER . '?text=")]')->length);
+    $this->assertGreaterThan(0, $x->query('//footer//a[starts-with(@href,"https://wa.me/' . WHATSAPP_NUMBER . '?text=")]')->length, 'Footer WhatsApp link keeps the main number');
+  }
+
+  public function testKdpScoreContactCard(): void
+  {
+    $x = self::dom(self::http('contact')['body']);
+    $card = '//*[contains(@class,"ccard")][h3[.="KDP Score"]]';
+    $this->assertSame(1, $x->query("$card//img[contains(@src,\"kdp-score.png\")][@alt=\"KDP Score logo\"]")->length);
+    $this->assertSame(1, $x->query("$card//a[starts-with(@href,\"https://kdpscore.com\")]")->length);
   }
 }

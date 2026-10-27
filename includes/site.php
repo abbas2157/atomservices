@@ -8,6 +8,7 @@ const SITE_NAME = 'Atom Services (Pvt) Ltd';
 const CONTACT_EMAIL = 'info@atomservices.org';
 const CONTACT_PHONE = '+1 646 726 0635';
 const WHATSAPP_NUMBER = '16467260635'; // digits only, international format, for wa.me links
+const WHATSAPP_FLOAT_NUMBER = '923041129252'; // the floating WhatsApp button on every page
 const WHATSAPP_TEXT = 'Hi Atom Services, I found you on atomservices.org and would like to talk.';
 
 // Company details. A null value is left off the site entirely (no placeholders on live pages);
@@ -38,8 +39,8 @@ function e($value): string {
 }
 
 /** WhatsApp click-to-chat link with a prefilled message. */
-function whatsapp_url(string $text = WHATSAPP_TEXT): string {
-  return 'https://wa.me/' . WHATSAPP_NUMBER . '?text=' . rawurlencode($text);
+function whatsapp_url(string $text = WHATSAPP_TEXT, string $number = WHATSAPP_NUMBER): string {
+  return 'https://wa.me/' . $number . '?text=' . rawurlencode($text);
 }
 
 /**

@@ -115,7 +115,9 @@ $logos = [
   'atombrand' => ['mark' => 'top', 'split' => 0.60],
   'mark-attendance' => ['mark' => 'top', 'split' => 0.62],
   'publishing-guru' => ['mark' => null],
+  'kdp-score' => ['mark' => null],                     // handle overlaps the wordmark, so no clean symbol crop
 ];
+// kdp-score-dark.jpg (white-on-black) is kept in brand-sources for dark backgrounds; not built.
 
 foreach ($logos as $name => $opt) {
   $im = load(is_file("$src/$name.png") ? "$src/$name.png" : "$src/$name.jpg");
