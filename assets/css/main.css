@@ -672,3 +672,22 @@ footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
 .flag-apps .store-btn { padding: 10px 14px; font-size: 14px; }
 .app .store-btn { padding: 7px 10px; font-size: 12.5px; gap: 6px; }
 .app .app-links { gap: 6px; }
+
+/* Large screens. The design is laid out in px around a ~1200px column, which left QHD, 4K, ultra-wide
+   and 8K displays with a thin strip in the middle. Wide desktops get a slightly wider column; bigger
+   screens zoom the whole page so it lays out like a 1700–1960px desktop, keeping every proportion.
+   Height has to qualify too, so a short ultra-wide (3440×1440) is not zoomed into a letterbox.
+   Browsers without `zoom` keep the normal layout. */
+@media (min-width: 1680px) { :root { --wrap: 1240px; } }
+@media (min-width: 2200px) and (min-height: 1000px) { html { zoom: 1.25; } }
+@media (min-width: 2560px) and (min-height: 1300px) { html { zoom: 1.5; } }
+@media (min-width: 3200px) and (min-height: 1400px) { html { zoom: 1.75; } }
+@media (min-width: 3600px) and (min-height: 1900px) { html { zoom: 2; } }
+@media (min-width: 5000px) and (min-height: 2600px) { html { zoom: 2.75; } }
+@media (min-width: 7000px) and (min-height: 3800px) { html { zoom: 4; } }
+
+/* Touch screens: small standalone links get a 40px-tall tap area without changing how they look. */
+@media (pointer: coarse) {
+  .crumbs a, .leader-links a, .legal a, .flag-links a, .pub-card > a { position: relative; }
+  .crumbs a::after, .leader-links a::after, .legal a::after, .flag-links a::after, .pub-card > a::after { content: ""; position: absolute; inset: -12px -4px; }
+}

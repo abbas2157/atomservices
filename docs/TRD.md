@@ -1,6 +1,6 @@
 # Technical Requirements Document: atomservices.org
 
-Last updated: 2026-10-27, KDP Score logo and contact card added, floating WhatsApp button number changed (launch: 2026-10-27)
+Last updated: 2026-10-27, KDP Score logo and contact card, floating WhatsApp number, large-screen and touch responsiveness (launch: 2026-10-27)
 
 ## 1. Purpose and scope
 
@@ -90,6 +90,7 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | N2 | Accessibility | Labels on every field, focus management, `aria-live` status, reduced motion respected, contrast ≥ 4.5:1 | `PagesTest::testFormFieldsHaveLabels`; Lighthouse Accessibility 100 |
 | N3 | Unicode | Names and messages in Urdu or with emoji stored intact (utf8mb4) | `ContactDatabaseTest::testUnicodeIsStoredIntact` |
 | N4 | Friendly 404 | `404.php`, `noindex`, works at any depth | `ServerRulesTest::testUnknownPageGetsFriendly404`, `testNested404StillLoadsStyles`; e2e |
+| N5 | Responsive from 320px phones to 8K | Mobile-first breakpoints (hamburger below 1100 px, grids stack below 860–900 px). The column widens to 1240 px from 1680 px. On bigger screens `html { zoom }` scales the whole page so it lays out like a 1700–1960 px desktop: 1.25 from 2200×1000, 1.5 from 2560×1300, 1.75 from 3200×1400 (21:9 ultra-wide), 2 from 3600×1900 (4K), 2.75 from 5000×2600, 4 from 7000×3800 (8K). Height must qualify too, so short wide screens are not letterboxed. Browsers without `zoom` keep the normal layout. On touch screens (`pointer: coarse`) breadcrumbs, team links, footer social links and "Visit …" links get a ≥36 px tap area via an invisible `::after` | e2e `responsive.spec.js`: "no sideways scroll…" (7 pages × 10 sizes, 320×568 to 7680×4320), "large screens fill the display…", "search results stay on screen on a 4K display", "small links have a tap area…" (phones); "header stays on one line at every width" |
 
 ## 6. Testing
 
