@@ -46,7 +46,7 @@ include __DIR__ . '/includes/header.php';
         <p>Nothing on this site is an offer of credit, investment advice or a solicitation to invest.</p>
 
         <h2 id="ip">3. Intellectual property</h2>
-        <p>The Atom Services name and logo, and the names and logos of Atomshop, AtomPay, Atom Seller, AtomBrand, Mark Attendance, KDP Score and Publishing Guru, together with the site's design and content, belong to Atom Services or its licensors. You may view and share pages for personal or business reference, but you may not copy, modify or reuse them commercially without our written permission. Third-party brand names belong to their owners.</p>
+        <p>The Atom Services name and logo, and the names and logos of Atomshop, AtomBrands, AtomSeller, AtomPay, Mark Attendance, KDP Score and Publishing Guru, together with the site's design and content, belong to Atom Services or its licensors. You may view and share pages for personal or business reference, but you may not copy, modify or reuse them commercially without our written permission. Third-party brand names belong to their owners.</p>
 
         <h2 id="conduct">4. Acceptable use</h2>
         <ul>

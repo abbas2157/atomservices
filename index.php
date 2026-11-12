@@ -63,20 +63,19 @@ include __DIR__ . '/includes/header.php';
   <section class="section band" id="ecosystem">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">The Atomshop ecosystem</span>
-        <h2>Shoppers, sellers, brands and financing on one platform.</h2>
-        <p>An order placed in one app reaches the other three immediately. Limits, routing and reminders are decided in one place.</p>
+        <span class="eyebrow">The Atom ecosystem</span>
+        <h2>One account. Four connected apps.</h2>
+        <p>Buyers, sellers, brands and financing share one login and one data layer. An order placed in one app reaches the other three immediately.</p>
       </div>
       <div class="eco">
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomshop-mark', ''); ?></div><span class="app-who">For shoppers</span><h3>Atomshop</h3><p>Buy mobiles, laptops, bikes and appliances on installments, or custom-order anything from any shop, and track every payment.</p><?php echo app_links('atomshop', 'Atomshop'); ?></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atompay-mark', ''); ?></div><span class="app-who">For financing</span><h3>AtomPay</h3><p>Verify once with CNIC and income to get a smart limit for eligible products: 3 months, no advance, 0% markup.</p><?php echo app_links('atompay', 'AtomPay'); ?></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atomseller-mark', ''); ?></div><span class="app-who">For local sellers</span><h3>Atom Seller</h3><p>Leads from the seller's own area, deals, guarantors and collections, all from a phone.</p><?php echo app_links('atomseller', 'Atom Seller'); ?></article>
-        <article class="app"><div class="app-ic logo-tile" aria-hidden="true"><?php echo brand_img('atombrand-mark', ''); ?></div><span class="app-who">For brands</span><h3>AtomBrand</h3><p>Brands run their storefront, stock, orders and bulk quotes, and sell across Pakistan without extra ad spend.</p><?php echo app_links('atombrand', 'AtomBrand'); ?></article>
-        <div class="core">
-          <div class="core-copy"><h3>ATOM Intelligence</h3><p>One login and one data layer behind every app.</p></div>
-          <div class="chips"><span class="chip">Smart Limit</span><span class="chip">Real-time routing</span><span class="chip">Timed reminders</span><span class="chip">Recovery Radar · next</span><span class="chip">KYC Vision · next</span></div>
-        </div>
+        <svg class="eco-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M50 50 0 22M50 50 100 22M50 50 0 78M50 50 100 78"/></svg>
+        <div class="eco-hub"><div class="hub-disc"><h3><span class="hub-kicker">ATOM</span> Intelligence</h3><p>one login<br>one data layer</p></div></div>
+        <article class="app eco-buyers"><div class="app-logo logo-tile" aria-hidden="true"><?php echo brand_img('atomshop', ''); ?></div><div class="app-copy"><span class="app-who">For buyers</span><h3>Atomshop.pk</h3><p>Shop any product and pay in steps.</p><?php echo app_links('atomshop', 'Atomshop'); ?></div></article>
+        <article class="app eco-brands"><div class="app-logo logo-tile" aria-hidden="true"><?php echo brand_img('atombrand', ''); ?></div><div class="app-copy"><span class="app-who">For brands</span><h3>AtomBrands</h3><p>List stock, run ads and supply sellers.</p><?php echo app_links('atombrand', 'AtomBrands'); ?></div></article>
+        <article class="app eco-sellers"><div class="app-logo logo-tile" aria-hidden="true"><?php echo brand_img('atomseller', ''); ?></div><div class="app-copy"><span class="app-who">For sellers</span><h3>AtomSeller</h3><p>Hire purchase ledger and area orders.</p><?php echo app_links('atomseller', 'AtomSeller'); ?></div></article>
+        <article class="app eco-pay phase-next"><div class="app-logo logo-tile" aria-hidden="true"><?php echo brand_img('atompay', ''); ?></div><div class="app-copy"><span class="app-who">Phase 2 · Financing</span><h3>AtomPay</h3><p>NBFCs and other sources finance seller stock.</p><?php echo app_links('atompay', 'AtomPay'); ?></div></article>
       </div>
+      <ul class="chips" aria-label="ATOM Intelligence features"><li class="chip">Smart Limit</li><li class="chip">Real-time routing</li><li class="chip">Timed reminders</li><li class="chip">Ask Atom</li><li class="chip next">Recovery Radar · next</li><li class="chip next">Demand signals · next</li></ul>
     </div>
   </section>
 
@@ -103,7 +102,7 @@ include __DIR__ . '/includes/header.php';
         <dl class="flag-facts">
           <div><dt>Plans</dt><dd>3–12 months from 20% advance</dd></div>
           <div><dt>AtomPay</dt><dd>3 months · no advance · 0% markup</dd></div>
-          <div><dt>Apps</dt><dd>Atomshop, AtomPay, Atom Seller, AtomBrand</dd></div>
+          <div><dt>Apps</dt><dd>Atomshop.pk, AtomBrands, AtomSeller, AtomPay</dd></div>
           <div><dt>Financed</dt><dd>Rs. 4.4 crore+ to date</dd></div>
         </dl>
       </article>

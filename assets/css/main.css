@@ -125,20 +125,6 @@ p { margin: 0; }
 }
 
 /* Ecosystem */
-.eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.app { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
-.app-who { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.app h3 { font-size: 22px; font-weight: 700; }
-.app p { color: var(--muted); font-size: 15px; }
-.core { grid-column: 1 / -1; background: var(--navy); color: var(--on-navy); border-radius: 12px; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; position: relative; }
-.core::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: -12px; height: 12px; border-left: 2px solid var(--amber); border-right: 2px solid var(--amber); }
-.core-copy { display: grid; gap: 6px; min-width: 0; }
-.core h3 { font-size: 20px; }
-.core p { color: var(--on-navy-muted); font-size: 15px; max-width: 520px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { font: 500 12px/1 var(--mono); padding: 7px 10px; border-radius: 999px; border: 1px solid rgba(238,241,247,.22); color: var(--on-navy); }
-@media (max-width: 860px) { .eco { grid-template-columns: 1fr 1fr; } .core::before { display: none; } }
-@media (max-width: 480px) { .eco { grid-template-columns: 1fr; } }
 
 /* Products */
 .products-section { background: var(--surface); border-block: 1px solid var(--line); }
@@ -194,7 +180,7 @@ form.meet .btn { justify-self: start; }
 .leader-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
 .leader { grid-column: span 3; display: grid; grid-template-columns: 150px 1fr; background: var(--navy-2); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; overflow: hidden; min-width: 0; transition: border-color .2s ease, transform .2s ease; }
 .leader.lead { grid-column: span 2; grid-template-columns: 1fr; }
-.leader:hover { border-color: rgba(245,165,36,.55); transform: translateY(-2px); }
+@media (hover: hover) { .leader:hover { border-color: rgba(245,165,36,.55); transform: translateY(-2px); } }
 .portrait { position: relative; aspect-ratio: 4 / 5; max-width: 100%; background: radial-gradient(120% 90% at 30% 15%, rgba(245,165,36,.28), transparent 60%), linear-gradient(160deg, #1E3260, #0E1830); overflow: hidden; }
 .leader:not(.lead) .portrait { aspect-ratio: auto; height: 100%; min-height: 190px; }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.03); }
@@ -206,6 +192,8 @@ form.meet .btn { justify-self: start; }
 .rank { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
 .leader h3 { font-size: 22px; font-weight: 700; color: var(--on-navy); }
 .leader .role { color: var(--on-navy-muted); font-size: 15px; line-height: 1.45; }
+.leader .exp { color: var(--on-navy-muted); font-size: 14px; line-height: 1.5; }
+.leader .exp b { color: var(--on-navy); font-weight: 600; }
 .leader-links { display: flex; gap: 14px; margin-top: 6px; font: 500 12px/1 var(--mono); }
 .leader-links a { color: var(--on-navy-muted); text-decoration: none; border-bottom: 1px solid rgba(238,241,247,.25); padding-bottom: 2px; }
 .leader-links a:hover { color: var(--on-navy); border-color: var(--amber); }
@@ -316,11 +304,6 @@ footer a:hover { color: var(--on-navy); }
 .stat b em { font-style: normal; color: var(--amber-ink); }
 
 /* Ecosystem cards */
-.app { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.app:hover { transform: translateY(-3px); border-color: rgba(245,165,36,.6); box-shadow: 0 22px 50px -30px rgba(15,27,51,.45); }
-.app-ic { width: 42px; height: 42px; border-radius: 11px; background: var(--navy); display: grid; place-items: center; margin-bottom: 6px; }
-.app-ic svg { width: 22px; height: 22px; }
-.core { background: linear-gradient(110deg, var(--navy), var(--navy-2)); box-shadow: 0 24px 60px -34px rgba(15,27,51,.6); }
 
 /* Flagship */
 .flag { background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%); border: 1px solid var(--line); border-top: 4px solid var(--amber); box-shadow: 0 30px 70px -40px rgba(15,27,51,.45); position: relative; overflow: hidden; }
@@ -474,8 +457,6 @@ form.meet { position: relative; }
 .svc h3 a:hover { background-size: 100% 2px; }
 .text-link { display: inline-block; margin-top: 28px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--amber); padding-bottom: 3px; }
 .text-link:hover, .flag-links a:hover, .pub-card a:hover, .see-also a:hover { color: var(--amber-ink); }
-.chip { transition: border-color .15s ease, background .15s ease; }
-.chip:hover { border-color: var(--amber); background: rgba(245,165,36,.08); }
 .gitex-tag { transition: background .15s ease, border-color .15s ease; }
 .gitex-tag:hover { background: rgba(245,165,36,.2); border-color: var(--amber); }
 .copy-btn { transition: color .15s ease, border-color .15s ease; }
@@ -662,16 +643,12 @@ footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
 .toast-logo picture, .toast-logo img { display: block; width: 22px; height: 22px; }
 
 /* App store buttons */
-.app { display: flex; flex-direction: column; gap: 10px; }
-.app .app-links { margin-top: auto; padding-top: 6px; }
 .app-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .store-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 8px; background: var(--navy); color: var(--on-navy); font: 600 13px/1 var(--body); text-decoration: none; border: 1px solid transparent; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
 .store-btn:hover { transform: translateY(-1px); border-color: var(--amber); background: var(--navy-2); }
 .store-btn svg { width: 16px; height: 16px; flex: none; }
 .get-app { display: grid; gap: 10px; margin-top: 14px; padding-top: 16px; border-top: 1px dashed var(--line); }
 .flag-apps .store-btn { padding: 10px 14px; font-size: 14px; }
-.app .store-btn { padding: 7px 10px; font-size: 12.5px; gap: 6px; }
-.app .app-links { gap: 6px; }
 
 /* Large screens. The design is laid out in px around a ~1200px column, which left QHD, 4K, ultra-wide
    and 8K displays with a thin strip in the middle. Wide desktops get a slightly wider column; bigger
@@ -690,4 +667,82 @@ footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
 @media (pointer: coarse) {
   .crumbs a, .leader-links a, .legal a, .flag-links a, .pub-card > a { position: relative; }
   .crumbs a::after, .leader-links a::after, .legal a::after, .flag-links a::after, .pub-card > a::after { content: ""; position: absolute; inset: -12px -4px; }
+}
+
+/* Ecosystem: four app cards around the ATOM Intelligence hub, as on the investor deck (slide 04).
+   Desktop is a 3-column grid with the hub spanning both rows in the middle; dashed spokes run from the
+   hub to each card. Below 900px the hub sits on top and the cards stack, with no spokes. */
+#ecosystem { --eco-hub: #5B35B0; --eco-hub-halo: rgba(91,53,176,.1); --eco-buyers: #5B35B0; --eco-brands: #3B4FB0; --eco-sellers: #B25E00; --eco-pay: #D12A45; --eco-line: rgba(91,53,176,.45); }
+:root[data-theme="dark"] #ecosystem { --eco-hub-halo: rgba(139,108,224,.16); --eco-buyers: #B9A3F5; --eco-brands: #9DAEF2; --eco-sellers: #F2A54A; --eco-pay: #FF7A8C; --eco-line: rgba(185,163,245,.5); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #ecosystem { --eco-hub-halo: rgba(139,108,224,.16); --eco-buyers: #B9A3F5; --eco-brands: #9DAEF2; --eco-sellers: #F2A54A; --eco-pay: #FF7A8C; --eco-line: rgba(185,163,245,.5); } }
+
+.eco { position: relative; display: grid; grid-template-columns: 1fr 250px 1fr; grid-template-rows: auto auto; grid-template-areas: "buyers hub brands" "sellers hub pay"; gap: 28px 44px; align-items: stretch; }
+.eco-buyers { grid-area: buyers; } .eco-brands { grid-area: brands; } .eco-sellers { grid-area: sellers; } .eco-pay { grid-area: pay; }
+.eco-lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.eco-lines path { fill: none; stroke: var(--eco-line); stroke-width: 2; stroke-dasharray: 6 7; vector-effect: non-scaling-stroke; }
+
+.eco-hub { grid-area: hub; position: relative; z-index: 1; display: grid; place-items: center; }
+.hub-disc { width: min(100%, 250px); aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; gap: 6px; text-align: center; padding: 20px;
+  background: radial-gradient(circle at 35% 30%, #7048C8, var(--eco-hub) 70%); color: #fff;
+  box-shadow: 0 0 0 22px var(--eco-hub-halo), 0 30px 60px -30px rgba(91,53,176,.7); }
+.hub-disc h3 { font-size: 28px; font-weight: 700; line-height: 1.15; color: #fff; }
+.hub-kicker { display: block; font: 600 13px/1 var(--body); letter-spacing: .08em; color: #F8C77E; margin-bottom: 8px; }
+.hub-disc p { font-size: 15px; line-height: 1.45; color: rgba(255,255,255,.85); }
+
+.app { position: relative; z-index: 1; min-width: 0; display: grid; grid-template-columns: 112px 1fr; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 18px 40px -32px rgba(15,27,51,.35); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+@media (hover: hover) { .app:hover { transform: translateY(-3px); border-color: var(--eco-hub); box-shadow: 0 22px 50px -30px rgba(15,27,51,.45); } }
+.app-logo { border: 0; border-radius: 10px; height: 92px; display: flex; align-items: center; justify-content: center; padding: 8px; overflow: hidden; }
+.app-logo picture { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; }
+.app-logo img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.app-copy { display: grid; gap: 6px; min-width: 0; align-content: start; }
+.app-who { font: 700 12px/1.2 var(--body); letter-spacing: .02em; text-transform: uppercase; color: var(--muted); }
+.eco-buyers .app-who { color: var(--eco-buyers); } .eco-brands .app-who { color: var(--eco-brands); } .eco-sellers .app-who { color: var(--eco-sellers); } .eco-pay .app-who { color: var(--eco-pay); }
+.app h3 { font-size: 24px; font-weight: 700; line-height: 1.15; }
+.app p { color: var(--muted); font-size: 15.5px; line-height: 1.45; }
+.app .app-links { gap: 6px; margin-top: 6px; }
+.app .store-btn { padding: 7px 10px; font-size: 12.5px; gap: 6px; }
+:root[data-theme="dark"] .app .store-btn { border-color: rgba(238,241,247,.2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .app .store-btn { border-color: rgba(238,241,247,.2); } }
+/* AtomPay is phase 2: a dashed red outline marks it as coming next */
+.app.phase-next { border: 1.5px dashed var(--eco-pay); }
+@media (hover: hover) { .app.phase-next:hover { border-color: var(--eco-pay); border-style: solid; } }
+
+.chips { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.chip { font: 600 14px/1 var(--body); padding: 11px 20px; border-radius: 999px; background: var(--eco-hub-halo); color: var(--eco-buyers); transition: background .15s ease; }
+.chip:hover { background: rgba(91,53,176,.18); }
+.chip.next { background: rgba(245,165,36,.14); color: var(--amber-ink); }
+
+@media (max-width: 1100px) {
+  .eco { gap: 24px 32px; grid-template-columns: 1fr 210px 1fr; }
+  .app { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+  .app-logo { height: 76px; width: 150px; }
+  .hub-disc { box-shadow: 0 0 0 14px var(--eco-hub-halo), 0 30px 60px -30px rgba(91,53,176,.7); }
+  .hub-disc h3 { font-size: 24px; }
+}
+@media (max-width: 900px) {
+  .eco { grid-template-columns: 1fr 1fr; grid-template-areas: "hub hub" "buyers brands" "sellers pay"; gap: 16px; }
+  .eco-lines { display: none; }
+  .eco-hub { margin: 18px 0 22px; }
+  .hub-disc { width: 210px; }
+}
+@media (max-width: 560px) {
+  .eco { grid-template-columns: 1fr; grid-template-areas: "hub" "buyers" "brands" "sellers" "pay"; }
+  .app { grid-template-columns: 1fr; align-items: start; padding: 18px; gap: 12px; }
+  .app-logo { width: 132px; height: 64px; padding: 6px 0; justify-content: flex-start; }
+  .app-logo picture { justify-content: flex-start; }
+  .app h3 { font-size: 21px; }
+  .chip { font-size: 13px; padding: 10px 16px; }
+}
+
+/* Team on phones: a small square photo beside the rank and name, with the role, experience and links
+   full width underneath, so no empty block is left under the photo. */
+@media (max-width: 520px) {
+  .leader, .leader.lead, .leader:last-child:nth-child(odd) { grid-template-columns: 84px 1fr; grid-template-rows: none; column-gap: 14px; row-gap: 4px; padding: 16px; align-items: center; }
+  .leader .leader-body, .leader:last-child:nth-child(odd) .leader-body { display: contents; }
+  .leader .portrait, .leader.lead .portrait, .leader:last-child:nth-child(odd) .portrait { grid-column: 1; grid-row: 1 / span 2; width: 84px; height: 84px; min-height: 0; aspect-ratio: 1 / 1; border-radius: 12px; align-self: center; }
+  .leader .initials { font-size: 30px !important; }
+  .leader .rank { grid-column: 2; align-self: end; }
+  .leader h3 { grid-column: 2; align-self: start; font-size: 19px; }
+  .leader .role { grid-column: 1 / -1; margin-top: 10px; padding-top: 12px; border-top: 2px solid var(--amber); }
+  .leader .exp, .leader .leader-links { grid-column: 1 / -1; }
 }

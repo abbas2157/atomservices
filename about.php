@@ -14,7 +14,7 @@ $details = [
   'Office' => COMPANY_OFFICE,
   'Email' => CONTACT_EMAIL,
   'Phone' => CONTACT_PHONE . ' (US)' . (COMPANY_PK_PHONE ? ' · ' . COMPANY_PK_PHONE . ' (PK)' : ''),
-  'Brands' => 'Atomshop.pk, AtomPay, Atom Seller, AtomBrand, Mark Attendance, KDP Score, Publishing Guru',
+  'Brands' => 'Atomshop.pk, AtomBrands, AtomSeller, AtomPay, Mark Attendance, KDP Score, Publishing Guru',
 ];
 
 include __DIR__ . '/includes/header.php';
@@ -58,8 +58,8 @@ include __DIR__ . '/includes/header.php';
       <div class="timeline">
         <div class="tl"><b>Shoppers</b><h3><?php echo brand_img('atomshop-mark', '', 'tl-logo'); ?>Atomshop</h3><p>Installments on mobiles, laptops, bikes, TVs and appliances, plus custom orders from any shop.</p></div>
         <div class="tl"><b>Financing</b><h3><?php echo brand_img('atompay-mark', '', 'tl-logo'); ?>AtomPay</h3><p>A verified spending limit for listed products: 3 months, no advance, 0% markup.</p></div>
-        <div class="tl"><b>Sellers and brands</b><h3><?php echo brand_img('atomseller-mark', '', 'tl-logo'); ?><?php echo brand_img('atombrand-mark', '', 'tl-logo'); ?>Atom Seller and AtomBrand</h3><p>Leads, collections, storefronts and stock management for local sellers and partner brands.</p></div>
-        <div class="tl"><b>Next</b><h3>Recovery Radar and KYC Vision</h3><p>Risk prediction, CNIC reading and demand insights, built on the same data layer.</p></div>
+        <div class="tl"><b>Sellers and brands</b><h3><?php echo brand_img('atomseller-mark', '', 'tl-logo'); ?><?php echo brand_img('atombrand-mark', '', 'tl-logo'); ?>AtomSeller and AtomBrands</h3><p>A hire purchase ledger and area orders for sellers; stock listings, ads and seller supply for brands.</p></div>
+        <div class="tl"><b>Next</b><h3>Recovery Radar and Demand signals</h3><p>Risk prediction and demand insights, built on the same data layer.</p></div>
       </div>
     </div>
   </section>

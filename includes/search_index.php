@@ -6,10 +6,10 @@
 function search_index(string $home): array {
   return [
     ['title' => 'Atomshop.pk', 'url' => $home . '#products', 'keywords' => 'installments installment shopping bnpl buy now pay later mobiles laptops bikes appliances flagship', 'text' => 'Pakistan\'s installment shopping ecosystem. Plans of 3–12 months from a 20% advance.'],
-    ['title' => 'AtomPay', 'url' => $home . '#ecosystem', 'keywords' => 'financing limit cnic credit wallet 0% markup no advance', 'text' => 'A smart spending limit after one CNIC and income check: 3 months, no advance, 0% markup.'],
-    ['title' => 'Atom Seller', 'url' => $home . '#ecosystem', 'keywords' => 'sellers shops leads guarantors collections merchants', 'text' => 'Leads, deals, guarantors and collections for local sellers, all from a phone.'],
-    ['title' => 'AtomBrand', 'url' => $home . '#ecosystem', 'keywords' => 'brands storefront stock orders bulk quotes retailers', 'text' => 'Brands run their storefront, stock, orders and bulk quotes across Pakistan.'],
-    ['title' => 'ATOM Intelligence', 'url' => $home . '#ecosystem', 'keywords' => 'ai smart limit routing reminders recovery kyc data', 'text' => 'One login and one data layer behind every Atomshop app.'],
+    ['title' => 'AtomPay', 'url' => $home . '#ecosystem', 'keywords' => 'financing phase 2 nbfc stock finance sellers credit', 'text' => 'Phase 2: NBFCs and other sources finance seller stock.'],
+    ['title' => 'AtomSeller', 'url' => $home . '#ecosystem', 'keywords' => 'atom seller sellers shops hire purchase ledger area orders collections merchants', 'text' => 'Hire purchase ledger and area orders for sellers.'],
+    ['title' => 'AtomBrands', 'url' => $home . '#ecosystem', 'keywords' => 'atombrand brands stock ads advertising supply sellers retailers', 'text' => 'Brands list stock, run ads and supply sellers.'],
+    ['title' => 'ATOM Intelligence', 'url' => $home . '#ecosystem', 'keywords' => 'ai smart limit routing reminders ask atom recovery radar demand signals data', 'text' => 'One login and one data layer behind every Atomshop app.'],
     ['title' => 'Mark Attendance', 'url' => $home . '#products', 'keywords' => 'face recognition attendance hr workforce saas offline buddy punching', 'text' => 'Face recognition attendance for offices, factories and warehouses.'],
     ['title' => 'KDP Score', 'url' => $home . '#products', 'keywords' => 'amazon kdp niche research books publishing ai', 'text' => 'Amazon KDP niche intelligence, powered by AI.'],
     ['title' => 'Publishing Guru', 'url' => $home . '#products', 'keywords' => 'amazon kdp publishing books ads accounts done for you', 'text' => 'Done-for-you Amazon KDP publishing. 100+ books launched.'],
@@ -20,7 +20,7 @@ function search_index(string $home): array {
     ['title' => 'Mobile app development', 'url' => 'services#mobile-apps', 'keywords' => 'android ios flutter react native app', 'text' => 'Android and iOS apps built for performance.'],
     ['title' => 'SaaS platform development', 'url' => 'services#saas', 'keywords' => 'cloud subscription multi-tenant product', 'text' => 'Cloud products, launch-ready.'],
     ['title' => 'UI/UX design', 'url' => 'services#ui-ux', 'keywords' => 'design user experience interface figma prototype', 'text' => 'User-centred digital experiences.'],
-    ['title' => 'Leadership team', 'url' => $home . '#team', 'keywords' => 'founder ceo cto directors adnan zaka mudassar abbas ahmed chaudhary gulshair murtaza javed rafique', 'text' => 'The people you\'ll meet at GITEX.'],
+    ['title' => 'Leadership team', 'url' => $home . '#team', 'keywords' => 'founder ceo cto directors leadership adnan zaka mudassar abbas sohaib ahmed chaudhary gulshair murtaza javed rafique', 'text' => '10 years running installments, plus the builders. The people you\'ll meet at GITEX.'],
     ['title' => 'Contact us', 'url' => 'contact', 'keywords' => 'email phone whatsapp address lahore wyoming office hours message', 'text' => CONTACT_EMAIL . ' · ' . CONTACT_PHONE],
     ['title' => 'About Atom Services', 'url' => 'about', 'keywords' => 'company story mission values who we are registered details secp ntn', 'text' => 'Smarter finance, better tomorrow. Our story, values and company details.'],
     ['title' => 'FAQs', 'url' => 'faqs', 'keywords' => 'questions help answers how does it work cities credit card hiring careers jobs', 'text' => 'Answers about our company, products and GITEX Global 2026.'],

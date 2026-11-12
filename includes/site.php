@@ -19,15 +19,26 @@ const COMPANY_SECP_NO = null;   // SECP company registration number
 const COMPANY_NTN = null;       // National Tax Number
 const COMPANY_PK_PHONE = null;  // Pakistan office number, e.g. '+92 42 1234 5678'
 
-// Mobile app store links. A null link is simply not shown, so fill these in as each app is published.
+// Mobile app store links, the same ones atomshop.pk uses (its config/website.php › app). A null link is
+// simply not shown, so fill these in as each app is published.
 const APP_LINKS = [
   'atomshop' => [
     'android' => 'https://play.google.com/store/apps/details?id=com.ecommerce.atomshop',
     'ios' => 'https://apps.apple.com/us/app/atomshop/id6744655747',
   ],
-  'atompay' => ['android' => null, 'ios' => null],
-  'atomseller' => ['android' => null, 'ios' => null],
-  'atombrand' => ['android' => null, 'ios' => null],
+  'atompay' => [
+    'android' => 'https://play.google.com/store/apps/details?id=com.ecommerce.atompay',
+    'ios' => 'https://apps.apple.com/us/app/atompay-pay-in-steps/id6817231756',
+  ],
+  'atomseller' => [
+    'android' => 'https://play.google.com/store/apps/details?id=com.ecommerce.atomseller',
+    'ios' => 'https://apps.apple.com/us/app/atom-seller-sell-more/id6817232001',
+  ],
+  // AtomBrands is on the App Store only; its Android app is not published yet.
+  'atombrand' => [
+    'android' => null,
+    'ios' => 'https://apps.apple.com/us/app/atombrand-brand-partner/id6820037360',
+  ],
 ];
 
 // GITEX Global 2026 opens 8 Dec 2026, 10:00 Dubai time (06:00 UTC).

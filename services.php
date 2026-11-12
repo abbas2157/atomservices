@@ -21,7 +21,7 @@ $services = [
     'tagline' => 'Android and iOS apps built for performance.',
     'body' => 'Customer and field-team apps that stay fast on mid-range phones and patchy connections, and publish cleanly to Google Play and the App Store.',
     'items' => ['Android and iOS apps', 'Offline-first data sync', 'Push notifications and reminders', 'Store listing and release'],
-    'proof' => 'Atomshop, AtomPay, Atom Seller and AtomBrand run on one shared account across devices.',
+    'proof' => 'Atomshop.pk, AtomBrands, AtomSeller and AtomPay run on one shared account across devices.',
   ],
   [
     'id' => 'saas',

@@ -109,6 +109,20 @@ final class SiteHelpersTest extends TestCase
     $this->assertSame('', app_links('no-such-app', 'Nothing'), 'Unknown apps render nothing');
   }
 
+  public function testPartnerAppLinksMatchTheirStoreListings(): void
+  {
+    $this->assertSame('https://play.google.com/store/apps/details?id=com.ecommerce.atompay', APP_LINKS['atompay']['android']);
+    $this->assertSame('https://apps.apple.com/us/app/atompay-pay-in-steps/id6817231756', APP_LINKS['atompay']['ios']);
+    $this->assertSame('https://play.google.com/store/apps/details?id=com.ecommerce.atomseller', APP_LINKS['atomseller']['android']);
+    $this->assertSame('https://apps.apple.com/us/app/atom-seller-sell-more/id6817232001', APP_LINKS['atomseller']['ios']);
+    $this->assertSame('https://apps.apple.com/us/app/atombrand-brand-partner/id6820037360', APP_LINKS['atombrand']['ios']);
+    // AtomBrands has no Android app yet, so it gets an App Store button only.
+    $html = app_links('atombrand', 'AtomBrands');
+    $this->assertSame(1, substr_count($html, 'class="store-btn"'));
+    $this->assertStringContainsString('aria-label="Get AtomBrands on App Store"', $html);
+    $this->assertStringNotContainsString('Google Play', $html);
+  }
+
   public function testEveryAppLinkIsEmptyOrAStoreUrl(): void
   {
     foreach (APP_LINKS as $app => $stores) {

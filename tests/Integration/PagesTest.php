@@ -294,10 +294,20 @@ final class PagesTest extends HttpTestCase
     $this->assertSame(0, $x->query('//a[contains(@class,"store-btn")][not(@href) or @href=""]')->length, 'No store button without a link');
   }
 
+  public function testEveryEcosystemCardHasItsStoreButtons(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    $expected = ['Atomshop.pk' => 2, 'AtomBrands' => 1, 'AtomSeller' => 2, 'AtomPay' => 2];
+    foreach ($expected as $name => $count) {
+      $card = '//section[@id="ecosystem"]//article[contains(@class,"app")][.//h3[.="' . $name . '"]]';
+      $this->assertSame($count, $x->query("$card//a[contains(@class,\"store-btn\")]")->length, $name);
+    }
+  }
+
   public function testProductLogosAreShown(): void
   {
     $home = self::http('')['body'];
-    foreach (['atomshop', 'atompay-mark', 'atomseller-mark', 'atombrand-mark', 'mark-attendance-mark', 'publishing-guru', 'kdp-score'] as $logo) {
+    foreach (['atomshop', 'atompay-mark', 'atomseller-mark', 'atombrand', 'atomseller', 'atompay', 'mark-attendance-mark', 'publishing-guru', 'kdp-score'] as $logo) {
       $this->assertStringContainsString("assets/img/brands/$logo.webp", $home, "$logo missing from homepage");
     }
     $this->assertStringNotContainsString('pub-mark', $home, 'KDP Score text placeholder replaced by its logo');
@@ -316,5 +326,65 @@ final class PagesTest extends HttpTestCase
     $card = '//*[contains(@class,"ccard")][h3[.="KDP Score"]]';
     $this->assertSame(1, $x->query("$card//img[contains(@src,\"kdp-score.png\")][@alt=\"KDP Score logo\"]")->length);
     $this->assertSame(1, $x->query("$card//a[starts-with(@href,\"https://kdpscore.com\")]")->length);
+  }
+
+  public function testEcosystemShowsFourAppsInDeckOrder(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    $names = [];
+    foreach ($x->query('//section[@id="ecosystem"]//article[contains(@class,"app")]//h3') as $h) {
+      $names[] = trim($h->textContent);
+    }
+    $this->assertSame(['Atomshop.pk', 'AtomBrands', 'AtomSeller', 'AtomPay'], $names);
+    $this->assertSame('One account. Four connected apps.', trim($x->query('//section[@id="ecosystem"]//h2')->item(0)->textContent));
+    // AtomPay is phase 2 and is the only card marked that way.
+    $phase2 = $x->query('//section[@id="ecosystem"]//article[contains(@class,"phase-next")]');
+    $this->assertSame(1, $phase2->length);
+    $this->assertStringContainsString('Phase 2', $phase2->item(0)->textContent);
+    // The ATOM Intelligence hub sits between the cards; the dashed spokes are decoration only.
+    $this->assertSame('ATOM Intelligence', preg_replace('/\s+/', ' ', trim($x->query('//section[@id="ecosystem"]//*[contains(@class,"eco-hub")]//h3')->item(0)->textContent)));
+    $this->assertSame(1, $x->query('//section[@id="ecosystem"]//svg[contains(@class,"eco-lines")][@aria-hidden="true"]')->length);
+    $chips = [];
+    foreach ($x->query('//section[@id="ecosystem"]//li[contains(@class,"chip")]') as $c) {
+      $chips[] = trim($c->textContent);
+    }
+    $this->assertSame(['Smart Limit', 'Real-time routing', 'Timed reminders', 'Ask Atom', 'Recovery Radar · next', 'Demand signals · next'], $chips);
+  }
+
+  public function testOldAppNamesAreGone(): void
+  {
+    foreach (['', 'about', 'services', 'terms'] as $path) {
+      $body = self::http($path)['body'];
+      $this->assertStringNotContainsString('Atom Seller', $body, $path);
+      $this->assertDoesNotMatchRegularExpression('/AtomBrand(?!s)/', strip_tags($body), $path);
+      $this->assertStringNotContainsString('KYC Vision', $body, $path);
+    }
+  }
+
+  public function testTeamShowsSixPeopleWithExperience(): void
+  {
+    foreach (['', 'about'] as $path) {
+      $x = self::dom(self::http($path)['body']);
+      $cards = $x->query('//section[@id="team"]//article[contains(@class,"leader")]');
+      $this->assertSame(6, $cards->length, $path);
+      $names = [];
+      foreach ($cards as $card) {
+        $names[] = trim($x->query('.//h3', $card)->item(0)->textContent);
+        $this->assertSame(1, $x->query('.//p[@class="exp"]/b', $card)->length, 'Each person shows their years in bold');
+      }
+      $this->assertSame(['Adnan Zaka', 'Mudassar Abbas', 'Muhammad Sohaib Chaudhary', 'Muhammad Javed Rafique', 'Muhammad Ahmed Chaudhary', 'Gulshair Murtaza'], $names);
+      $this->assertStringContainsString('10 years running installments', $x->query('//section[@id="team"]//h2')->item(0)->textContent);
+    }
+  }
+
+  public function testTeamPhotosShownWhereAvailable(): void
+  {
+    $x = self::dom(self::http('')['body']);
+    // All six people have a photo.
+    foreach (['Adnan Zaka' => 'team-1', 'Mudassar Abbas' => 'team-2', 'Muhammad Sohaib Chaudhary' => 'team-6', 'Muhammad Javed Rafique' => 'team-3', 'Muhammad Ahmed Chaudhary' => 'team-4', 'Gulshair Murtaza' => 'team-5'] as $name => $img) {
+      $card = '//section[@id="team"]//article[.//h3[.="' . $name . '"]]';
+      $this->assertSame(1, $x->query("$card//img[contains(@src,\"assets/img/team/$img.jpg\")]")->length, $name);
+      $this->assertSame(1, $x->query("$card//source[contains(@srcset,\"assets/img/team/$img.webp\")]")->length, $name);
+    }
   }
 }

@@ -140,8 +140,8 @@ test('cookie notice stays dismissed across pages', async ({ page }) => {
 test('team photos are shown whole (square, not cropped)', async ({ page }) => {
   await open(page, 'about');
   const portraits = page.locator('.leader .portrait');
-  await expect(portraits).toHaveCount(5);
-  for (let i = 0; i < 5; i++) {
+  await expect(portraits).toHaveCount(6);
+  for (let i = 0; i < 6; i++) {
     const box = await portraits.nth(i).boundingBox();
     expect(Math.abs(box.width - box.height), `portrait ${i} is ${Math.round(box.width)}×${Math.round(box.height)}`).toBeLessThanOrEqual(2);
   }

@@ -183,6 +183,19 @@ test.describe('widgets', () => {
     await expect.poll(() => card.evaluate((el) => getComputedStyle(el).borderColor)).not.toBe(before);
   });
 
+  test('ecosystem hub sits between the app cards like the deck', async ({ page }, testInfo) => {
+    test.skip(isMobile(testInfo), 'cards stack under the hub on phones');
+    await page.setViewportSize({ width: 1366, height: 900 });
+    await page.goto('./#ecosystem');
+    const box = (sel) => page.locator(`#ecosystem ${sel}`).boundingBox();
+    const [hub, buyers, brands, sellers, pay] = await Promise.all(['.hub-disc', '.eco-buyers', '.eco-brands', '.eco-sellers', '.eco-pay'].map(box));
+    expect(buyers.x + buyers.width).toBeLessThan(hub.x);
+    expect(brands.x).toBeGreaterThan(hub.x + hub.width);
+    expect(sellers.y).toBeGreaterThan(buyers.y + buyers.height - 1);
+    expect(pay.y).toBeGreaterThan(brands.y + brands.height - 1);
+    await expect(page.locator('#ecosystem .eco-lines')).toBeVisible();
+  });
+
   test('GITEX countdown shows a number of days', async ({ page }) => {
     await page.goto('./');
     await expect(page.locator('#days')).toHaveText(/^(\d+|Now)$/);
