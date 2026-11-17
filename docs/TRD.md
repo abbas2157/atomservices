@@ -1,6 +1,6 @@
 # Technical Requirements Document: atomservices.org
 
-Last updated: 2026-10-27, KDP Score logo and contact card, floating WhatsApp number, large-screen and touch responsiveness (launch: 2026-10-27)
+Last updated: 2026-11-17, readable form success panel on light pages (launch: 2026-10-27)
 
 ## 1. Purpose and scope
 
@@ -52,7 +52,7 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | F20 | Skip to content | First focusable element; jumps to `<main>` | e2e "skip link…" (Chrome; Safari only tabs to links with a system setting) | ✅ |
 | F21 | Password visibility toggle | The site has no password fields | — | ⛔ |
 | F22 | UTM tracking | Inbound: first-touch `utm_*` kept in `sessionStorage`, sent with forms, stored in the message and email. Outbound: product links tagged `utm_source=atomservices.org` | JS unit tests `parseUtm`/`mergeUtm`; `ContactHandlerTest::testUtm…`; `ContactDatabaseTest` (stored in DB); e2e (sent with form, survives page change) | ✅ |
-| F23 | Form success states | Success panel with focus, "send another" | e2e "meeting form success state…", "UTM campaign survives…" | ✅ |
+| F23 | Form success states | Success panel with focus, "send another"; panel sets its own light text and the ghost button is transparent, so it stays readable on light pages (contact, services) | e2e "meeting form success state…", "UTM campaign survives…", "contact page form shows errors, then a success state" (checks title/button colours) | ✅ |
 | F24 | Form error states | Inline per-field errors (`aria-invalid`, `aria-describedby`), server errors mapped to fields, network/server failure messages, input kept | Unit `contact_validate`/`contact_process`; integration endpoint 422/405; e2e error tests | ✅ |
 | F25 | Forms work before or without JavaScript | Plain POST is redirected (303) back to the form with a status message | Unit `contact_redirect_url`/`contact_status_message`; `ContactEndpointTest::testPlain…`; e2e "forms still work without JavaScript" | ✅ |
 | F26 | Spam protection | Hidden honeypot field; bots get a fake success | Unit `testHoneypot…`, `testSpamLooks…`; integration | ✅ |

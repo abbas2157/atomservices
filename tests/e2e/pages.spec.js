@@ -100,6 +100,16 @@ test('contact page form shows errors, then a success state', async ({ page }) =>
   await page.locator('#e-message').fill('I would like to apply for a design role.');
   await form.getByRole('button', { name: 'Send message' }).click();
   await expect(page.locator('#message .form-success')).toBeVisible();
+  // On this light page the panel must still use light-on-navy text, and the button must not get the browser's white background.
+  const colors = await page.locator('#message .form-success').evaluate((el) => {
+    const css = (node) => getComputedStyle(node);
+    const btn = el.querySelector('[data-send-another]');
+    return { panel: css(el).backgroundColor, title: css(el.querySelector('h3')).color, btnText: css(btn).color, btnBg: css(btn).backgroundColor };
+  });
+  expect(colors.title).toBe('rgb(238, 241, 247)');
+  expect(colors.btnText).toBe('rgb(238, 241, 247)');
+  expect(colors.btnBg).toBe('rgba(0, 0, 0, 0)');
+  expect(colors.panel).not.toBe(colors.title);
   expect(posted).toContain('name="form"\r\n\r\nenquiry');
   expect(posted).toContain('Careers');
 });
