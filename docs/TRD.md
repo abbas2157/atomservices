@@ -1,6 +1,6 @@
 # Technical Requirements Document: atomservices.org
 
-Last updated: 2026-11-17, readable form success panel on light pages (launch: 2026-10-27)
+Last updated: 2026-11-18, admin dashboard (/admin) with messages inbox, subscribers, SEO editor and site settings (launch: 2026-10-27)
 
 ## 1. Purpose and scope
 
@@ -19,6 +19,8 @@ must update this document and add or update tests** (see section 6).
 | Pages | `index.php`, `services.php`, `about.php`, `contact.php`, `faqs.php`, `privacy-policy.php`, `terms.php`, `404.php`, with shared `includes/header.php`, `footer.php`, `team.php` (leadership, used on home and About), `cta_band.php` and `form_parts.php` |
 | Settings | `includes/site.php` (public constants and helpers, including company details: a `null` detail such as the SECP number is left off the site, never shown as a placeholder). Secrets live in `includes/config.php`, which is gitignored |
 | Forms | `forms/contact.php` (endpoint) → `includes/contact_handler.php` (pure logic) → MySQL `contact_messages` + SMTP via PHPMailer |
+| Admin | `admin.php` (front controller, all `/admin*` URLs via `.htaccess`) → `includes/admin/` (functions, layout, views) + `assets/css/admin.css`, `assets/js/admin.js`. Adapted from the Publishing Guru / Mark Attendance dashboards. Login credentials in `includes/config.php` (hash only), set with `php tools/set-admin-password.php` |
+| Dynamic settings | `includes/settings.php` (`site_setting()`, `as_settings` table) backs the editable constants in `includes/site.php` (contact details, WhatsApp numbers, social links, app store links, GA4, Search Console). `includes/seo_meta.php` (`as_page_meta` table) holds per-page SEO overrides. Both fail soft to the hard-coded defaults when the DB is down |
 | Front end | `assets/css/main.css`, `assets/js/lib.js` (pure helpers), `assets/js/main.js` (DOM behaviour). No frameworks, no third-party scripts |
 | Fonts | Self-hosted WOFF2 in `assets/fonts/` (one static file per weight) |
 | Images | `tools/build-images.php` builds team photos (500×500 JPEG + WebP), `og-image.png` and `apple-touch-icon.png`. `tools/build-logos.php` builds product logos and symbol-only marks (PNG + WebP) from `tools/brand-sources/` into `assets/img/brands/`, shown with `brand_img()` |
@@ -71,6 +73,9 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | F36 | Company logo | The red dot-grid mark from the favicon, redrawn as SVG by `logo_mark()` in `includes/site.php`, in the header, footer and loading animation. `tools/build-images.php` draws the same mark into `og-image.png` and `apple-touch-icon.png` | Unit `testLogoMarkIsDecorativeSvgWithUniqueGradientIds`; `PagesTest::testCompanyLogoInHeaderAndFooter`, `testIdsAreUnique` | ✅ |
 | F35 | Form emails reach both inboxes | `RECEIVING_EMAIL` in `includes/config.php` is a comma-separated list (`info@atomservices.org, abbas8156@gmail.com`); `mail_recipients()` splits it, dropping invalid or duplicate addresses. Applies to meeting requests, project enquiries and contact messages | Unit `testMailRecipients…`, `testConfiguredRecipientsIncludeBothInboxes` | 🟡 Set the same value in the live server's `config.php` |
 | F34 | Copy button never gets stuck | Clipboard API with a 1 s timeout, falling back to a pinned, non-scrolling textarea (iOS) | e2e copy tests on four browser setups (80/80 repeated runs) | ✅ |
+| F42 | Admin dashboard | `/admin`: dark-sidebar dashboard (same layout as the Publishing Guru / Mark Attendance admins) with stats, recent messages, site-setup checklist and per-form bars. Login (`/admin/login`) with CSRF, per-IP rate limiting (8 fails = 15 min lock in `data/ratelimit/`, blocked from the web), hashed password in gitignored `config.php`, `X-Robots-Tag: noindex`, `robots.txt Disallow: /admin`. First admin visit runs `admin_migrate()` (creates `as_settings`, `as_page_meta`, adds `status`/`notes` to `contact_messages`) | Unit `AdminFunctionsTest` (CSRF, type labels, badges, initials, time_ago, icons); integration `AdminTest` (redirects, login page, noindex, blocked `data/`); manual sign-in flow verified 2026-11-18 | ✅ |
+| F43 | Messages inbox | `/admin/messages`: search + form-type + status filters, CSV export (Excel-safe, UTF-8 BOM), detail view with reply-by-email / WhatsApp buttons, internal notes, new→read→replied workflow (opening a new message marks it read), delete with confirm. `/admin/subscribers`: newsletter list, search, CSV export, remove | Unit `testMessageTypeMatchesTheSubjectsContactHandlerComposes` (admin labels stay in sync with `contact_compose()`); `AdminTest::testAdminPostActionsRequireLogin` | ✅ |
+| F44 | Site settings editable in the dashboard | `/admin/settings`: contact email/phone, both WhatsApp numbers + prefilled text, form recipients, 5 social profiles, 8 app store links, GA4 id, Search Console tag. Saved values win over the `site.php` defaults (`site_setting()`); validation per type (url/email/emails/digits/ga4). GA4 default off because the privacy policy promises no analytics | Unit `SiteSettingsTest` (validation per type, every field has a current value); settings→footer round trip verified over HTTP 2026-11-18 | ✅ |
 
 ## 4. SEO requirements
 
@@ -82,7 +87,9 @@ Status: ✅ done and tested · 🟡 done, needs a manual step at deploy · ⛔ n
 | S4 | Trust signals | Real traction figures, live product links, named leadership with LinkedIn, registered entities, Organization schema | `PagesTest::testStructuredDataIsValidJson` | ✅ |
 | S5 | Internal linking | Nav, footer "Company" links, capability → service anchors, "see also" links, 404 page links | `PagesTest` link tests | ✅ |
 | S6 | Image alt text | Descriptive alt on every image; decorative SVGs `aria-hidden` | `PagesTest::testEveryImageHasAltText` | ✅ |
-| S7 | XML sitemap | `sitemap.xml` (all seven public pages, clean URLs), referenced from `robots.txt` | `ServerRulesTest::testSitemapIsValidAndEveryUrlIsLive` | ✅ |
+| S7 | XML sitemap | `sitemap.php` served as `/sitemap.xml` (`.htaccess` rewrite): all seven public pages with clean URLs, `lastmod` from the page file's mtime, pages hidden in `/admin/seo` dropped. Referenced from `robots.txt` | `ServerRulesTest::testSitemapIsValidAndEveryUrlIsLive`; `AdminTest::testGeneratedSitemapListsEveryPublicPage` | ✅ |
+| S8 | SEO editable per page | `/admin/seo`: overview with title/description length checks (30–60 / 70–160 chars), schema and index status; per-page editor with live Google SERP preview, link (OG) preview, social image URL and JSON-LD editor (validated; replaces the default Organization schema; `[]` = none), "Hide from Google" (noindex + out of the sitemap). Only changed values are stored (`as_page_meta`); "Default" resets to what the page file says. Overrides applied in `includes/header.php`, failing soft when the DB is down | Unit `SeoMetaTest` (defaults parsed from every page, schema validation, length states); save→live→reset and noindex→sitemap round trips verified over HTTP 2026-11-18 | ✅ |
+| S9 | Google tags | `google-site-verification` meta and GA4 snippet emitted by `includes/header.php` only when set in `/admin/settings` | `SiteSettingsTest::testGa4Validation`; default-off state covered by existing page tests | ✅ |
 
 ## 5. Non-functional requirements
 
@@ -119,6 +126,8 @@ The full step-by-step manual is in [DEPLOY.md](DEPLOY.md). Summary:
 1. Upload the files. Do not upload `node_modules/`, `tests/`, `tools/originals/` or `.git/` (they are blocked
    by `.htaccess` anyway).
 2. On the server, run `composer install --no-dev` and create `includes/config.php` from `config.sample.php`.
+   Then create the admin login: `php tools/set-admin-password.php <username> <strong password> "<display name>"`
+   and sign in at `/admin/login` (the first visit creates the admin tables automatically).
 3. Enable SSL on the host (Let's Encrypt / cPanel AutoSSL) **before** relying on the HTTPS redirect.
 4. Run `BASE_URL=https://atomservices.org/ npm run test:links` and `npm run test:e2e` against live.
 5. Send one real test enquiry and confirm it arrives by email and in the database.

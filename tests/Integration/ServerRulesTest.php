@@ -37,10 +37,11 @@ final class ServerRulesTest extends HttpTestCase
 
   public function testDesignHtmlUrlsRedirectToPhpPages(): void
   {
+    // Since the clean-URL change (F39), .html addresses go straight to the clean URL.
     foreach (['about', 'contact', 'faqs', 'privacy-policy', 'terms'] as $page) {
       $r = self::http("$page.html");
       $this->assertSame(301, $r['status'], "$page.html");
-      $this->assertStringEndsWith("/$page.php", $r['redirect']);
+      $this->assertStringEndsWith("/$page", $r['redirect']);
     }
     $r = self::http('index.html');
     $this->assertSame(301, $r['status']);

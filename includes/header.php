@@ -8,6 +8,7 @@
  */
 require_once __DIR__ . '/site.php';
 require_once __DIR__ . '/search_index.php';
+require_once __DIR__ . '/seo_meta.php';
 
 $pageTitle = $pageTitle ?? SITE_NAME;
 $metaDescription = $metaDescription ?? 'Atom Services (Pvt) Ltd builds AI-powered product financing and the software around it: Atomshop.pk, AtomPay, Mark Attendance, KDP Score and Publishing Guru.';
@@ -19,25 +20,16 @@ $home = ($currentPage === 'index.php') ? '' : './';
 $canonical = absolute_url($canonicalPath);
 $ogImage = absolute_url('assets/img/og-image.png');
 
-$organization = [
-  '@context' => 'https://schema.org',
-  '@type' => 'Organization',
-  'name' => SITE_NAME,
-  'alternateName' => 'Atom Services',
-  'url' => SITE_URL,
-  'logo' => absolute_url('assets/img/apple-touch-icon.png'),
-  'email' => CONTACT_EMAIL,
-  'telephone' => CONTACT_PHONE,
-  'slogan' => 'Smarter finance, better tomorrow.',
-  'address' => [
-    ['@type' => 'PostalAddress', 'addressLocality' => 'Lahore', 'addressCountry' => 'PK'],
-    ['@type' => 'PostalAddress', 'addressLocality' => 'Sheridan', 'addressRegion' => 'WY', 'addressCountry' => 'US'],
-  ],
-  'sameAs' => [
-    'https://www.linkedin.com/company/atomservicesofficial/',
-    'https://www.facebook.com/AtomServicesOfficial/',
-  ],
-];
+// Organization structured data; a per-page override saved in /admin/seo replaces it ('' = none).
+$schemaJson = json_encode(organization_schema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+// SEO edits saved in /admin/seo override the defaults above (silently skipped if the DB is down).
+$seo = $noindex ? [] : seo_page_meta(seo_path_for($canonicalPath));
+if (isset($seo['title'])) { $pageTitle = $seo['title']; }
+if (isset($seo['description'])) { $metaDescription = $seo['description']; }
+if (isset($seo['og_image'])) { $ogImage = str_starts_with($seo['og_image'], '/') ? absolute_url($seo['og_image']) : $seo['og_image']; }
+if (isset($seo['schema_json'])) { $schemaJson = $seo['schema_json'] === '' ? null : $seo['schema_json']; }
+$seoNoindex = !empty($seo['noindex']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,7 +43,13 @@ $organization = [
   <?php /* Error pages can be served at any depth, so resolve relative links from the site root. */ ?>
   <base href="<?php echo e(rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/'); ?>">
 <?php else: ?>
+<?php if ($seoNoindex): ?>
+  <meta name="robots" content="noindex">
+<?php endif; ?>
   <link rel="canonical" href="<?php echo e($canonical); ?>">
+<?php endif; ?>
+<?php if (GOOGLE_SITE_VERIFICATION !== ''): ?>
+  <meta name="google-site-verification" content="<?php echo e(GOOGLE_SITE_VERIFICATION); ?>">
 <?php endif; ?>
   <meta name="theme-color" content="#14213D">
 
@@ -81,7 +79,14 @@ $organization = [
 
   <link href="assets/css/main.css?v=<?php echo filemtime(__DIR__ . '/../assets/css/main.css'); ?>" rel="stylesheet">
   <noscript><style>#preloader { display: none; }</style></noscript>
-  <script type="application/ld+json"><?php echo json_encode($organization, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
+<?php if ($schemaJson !== null): ?>
+  <script type="application/ld+json"><?php echo $schemaJson; ?></script>
+<?php endif; ?>
+<?php if (GA4_MEASUREMENT_ID !== ''): ?>
+  <!-- Google Analytics 4 (set in /admin/settings) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode(GA4_MEASUREMENT_ID); ?>"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '<?php echo e(GA4_MEASUREMENT_ID); ?>');</script>
+<?php endif; ?>
 </head>
 <body>
 

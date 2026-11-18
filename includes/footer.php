@@ -47,7 +47,17 @@
         <li><a href="terms">Terms of use</a></li>
       </ul>
     </div>
-    <div class="legal"><span>© <?php echo date('Y'); ?> Atom Services (Pvt) Ltd. All rights reserved.</span><span><a href="https://www.linkedin.com/company/atomservicesofficial/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.facebook.com/AtomServicesOfficial/" target="_blank" rel="noopener">Facebook</a></span></div>
+<?php
+  // Social profiles come from /admin/settings (SOCIAL_LINKS); an empty link is simply not shown.
+  $socialNames = ['linkedin' => 'LinkedIn', 'facebook' => 'Facebook', 'twitter' => 'Twitter/X', 'instagram' => 'Instagram', 'youtube' => 'YouTube'];
+  $socialLinks = [];
+  foreach (SOCIAL_LINKS as $key => $url) {
+    if ($url !== '' && isset($socialNames[$key])) {
+      $socialLinks[] = '<a href="' . e($url) . '" target="_blank" rel="noopener">' . $socialNames[$key] . '</a>';
+    }
+  }
+?>
+    <div class="legal"><span>© <?php echo date('Y'); ?> Atom Services (Pvt) Ltd. All rights reserved.</span><?php if ($socialLinks): ?><span><?php echo implode(' · ', $socialLinks); ?></span><?php endif; ?></div>
   </div>
 </footer>
 

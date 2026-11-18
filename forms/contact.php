@@ -8,6 +8,7 @@
  */
 
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/site.php'; // FORM_RECIPIENTS (editable in /admin/settings)
 require_once __DIR__ . '/../includes/contact_handler.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $mail->CharSet = 'UTF-8';
 
     $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
-    foreach (mail_recipients(RECEIVING_EMAIL) as $to) {
+    foreach (mail_recipients(FORM_RECIPIENTS) as $to) {
       $mail->addAddress($to);
     }
     $mail->addReplyTo($email, $name);

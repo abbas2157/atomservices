@@ -25,7 +25,8 @@ final class PagesTest extends HttpTestCase
     $this->assertSame(200, $r['status']);
     $this->assertStringContainsString('text/html', $r['headers']['content-type'] ?? '');
     $this->assertDoesNotMatchRegularExpression('/<b>(Warning|Notice|Fatal error|Deprecated)<\/b>/', $r['body']);
-    $this->assertStringEndsWith("</html>\n", $r['body']);
+    // rtrim: a checkout with CRLF line endings serves "</html>\r\n".
+    $this->assertStringEndsWith('</html>', rtrim($r['body']));
   }
 
   #[DataProvider('pages')]

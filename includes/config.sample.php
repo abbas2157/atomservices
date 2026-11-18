@@ -20,4 +20,12 @@ define('SMTP_FROM_EMAIL', 'you@example.com');
 define('SMTP_FROM_NAME', 'Atom Services');
 
 // Where form notifications are delivered. Several addresses: separate with commas.
+// (Default only: once saved in /admin/settings, the saved value wins.)
 define('RECEIVING_EMAIL', 'info@atomservices.org, abbas8156@gmail.com');
+
+// --- Admin dashboard (/admin) ---
+// Store only a password_hash() — never the plain password. Empty hash = login disabled.
+// Set with: php tools/set-admin-password.php <username> <password> [display name]
+define('ADMIN_USERNAME', 'admin');
+define('ADMIN_PASSWORD_HASH', '');
+define('ADMIN_DISPLAY_NAME', 'Atom Services Admin');

@@ -11,7 +11,8 @@ final class BuildImagesTest extends TestCase
       return;
     }
     // Load only the square() helper; running the whole script would rebuild every image.
-    $src = file_get_contents(__DIR__ . '/../../tools/build-images.php');
+    // Normalise line endings first: a checkout with CRLF would otherwise not match.
+    $src = str_replace("\r\n", "\n", (string) file_get_contents(__DIR__ . '/../../tools/build-images.php'));
     preg_match('/function square\(.*?\n}\n/s', $src, $m);
     eval($m[0]);
   }
