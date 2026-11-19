@@ -115,12 +115,13 @@ final class SiteHelpersTest extends TestCase
     $this->assertSame('https://apps.apple.com/us/app/atompay-pay-in-steps/id6817231756', APP_LINKS['atompay']['ios']);
     $this->assertSame('https://play.google.com/store/apps/details?id=com.ecommerce.atomseller', APP_LINKS['atomseller']['android']);
     $this->assertSame('https://apps.apple.com/us/app/atom-seller-sell-more/id6817232001', APP_LINKS['atomseller']['ios']);
+    $this->assertSame('https://play.google.com/store/apps/details?id=com.ecommerce.atombrand', APP_LINKS['atombrand']['android']);
     $this->assertSame('https://apps.apple.com/us/app/atombrand-brand-partner/id6820037360', APP_LINKS['atombrand']['ios']);
-    // AtomBrands has no Android app yet, so it gets an App Store button only.
+    // AtomBrands is on both stores since 19 Nov 2026, so it gets both buttons.
     $html = app_links('atombrand', 'AtomBrands');
-    $this->assertSame(1, substr_count($html, 'class="store-btn"'));
+    $this->assertSame(2, substr_count($html, 'class="store-btn"'));
+    $this->assertStringContainsString('aria-label="Get AtomBrands on Google Play"', $html);
     $this->assertStringContainsString('aria-label="Get AtomBrands on App Store"', $html);
-    $this->assertStringNotContainsString('Google Play', $html);
   }
 
   public function testEveryAppLinkIsEmptyOrAStoreUrl(): void

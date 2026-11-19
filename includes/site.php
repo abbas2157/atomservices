@@ -61,9 +61,9 @@ define('APP_LINKS', (function (): array {
       'android' => 'https://play.google.com/store/apps/details?id=com.ecommerce.atomseller',
       'ios' => 'https://apps.apple.com/us/app/atom-seller-sell-more/id6817232001',
     ],
-    // AtomBrands is on the App Store only; its Android app is not published yet.
+    // AtomBrands is on both stores; its Android app was published on 19 Nov 2026.
     'atombrand' => [
-      'android' => null,
+      'android' => 'https://play.google.com/store/apps/details?id=com.ecommerce.atombrand',
       'ios' => 'https://apps.apple.com/us/app/atombrand-brand-partner/id6820037360',
     ],
   ];

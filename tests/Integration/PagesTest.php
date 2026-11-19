@@ -298,7 +298,7 @@ final class PagesTest extends HttpTestCase
   public function testEveryEcosystemCardHasItsStoreButtons(): void
   {
     $x = self::dom(self::http('')['body']);
-    $expected = ['Atomshop.pk' => 2, 'AtomBrands' => 1, 'AtomSeller' => 2, 'AtomPay' => 2];
+    $expected = ['Atomshop.pk' => 2, 'AtomBrands' => 2, 'AtomSeller' => 2, 'AtomPay' => 2];
     foreach ($expected as $name => $count) {
       $card = '//section[@id="ecosystem"]//article[contains(@class,"app")][.//h3[.="' . $name . '"]]';
       $this->assertSame($count, $x->query("$card//a[contains(@class,\"store-btn\")]")->length, $name);

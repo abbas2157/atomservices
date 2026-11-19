@@ -64,7 +64,7 @@ function site_setting_fields(): array {
       'app_atompay_ios' => ['AtomPay · App Store', 'url', '', ''],
       'app_atomseller_android' => ['AtomSeller · Google Play', 'url', '', ''],
       'app_atomseller_ios' => ['AtomSeller · App Store', 'url', '', ''],
-      'app_atombrand_android' => ['AtomBrands · Google Play', 'url', '', 'Empty until the Android app is published.'],
+      'app_atombrand_android' => ['AtomBrands · Google Play', 'url', '', ''],
       'app_atombrand_ios' => ['AtomBrands · App Store', 'url', '', ''],
     ]],
     'google' => ['globe', 'Google', 'Analytics and Search Console.', [
