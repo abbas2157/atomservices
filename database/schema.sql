@@ -31,6 +31,32 @@ CREATE TABLE IF NOT EXISTS as_settings (
   value TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Leadership section, edited in /admin/team. Seeded from the defaults in includes/team_data.php
+-- by team_install() the first time a signed-in admin opens /admin.
+CREATE TABLE IF NOT EXISTS as_team (
+  id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name            VARCHAR(120) NOT NULL,
+  initials        VARCHAR(4) NOT NULL DEFAULT '',
+  rank_label      VARCHAR(40) NOT NULL DEFAULT '',
+  role            VARCHAR(160) NOT NULL DEFAULT '',
+  experience      VARCHAR(400) NOT NULL DEFAULT '',
+  email           VARCHAR(190) NOT NULL DEFAULT '',
+  phone           VARCHAR(40) NOT NULL DEFAULT '',
+  linkedin        VARCHAR(300) NOT NULL DEFAULT '',
+  facebook        VARCHAR(300) NOT NULL DEFAULT '',
+  instagram       VARCHAR(300) NOT NULL DEFAULT '',
+  twitter         VARCHAR(300) NOT NULL DEFAULT '',
+  youtube         VARCHAR(300) NOT NULL DEFAULT '',
+  github          VARCHAR(300) NOT NULL DEFAULT '',
+  website         VARCHAR(300) NOT NULL DEFAULT '',
+  photo           VARCHAR(60) NOT NULL DEFAULT '',
+  contact_private TINYINT(1) NOT NULL DEFAULT 0,
+  is_published    TINYINT(1) NOT NULL DEFAULT 1,
+  sort_order      INT NOT NULL DEFAULT 0,
+  updated_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY sort_idx (sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- SEO overrides per page, edited in /admin/seo. NULL = use the default written in the page file.
 CREATE TABLE IF NOT EXISTS as_page_meta (
   path        VARCHAR(100) NOT NULL PRIMARY KEY,

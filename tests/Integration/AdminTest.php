@@ -9,7 +9,7 @@ final class AdminTest extends HttpTestCase
 {
   public function testAdminRedirectsToLoginWhenSignedOut(): void
   {
-    foreach (['admin', 'admin/messages', 'admin/subscribers', 'admin/seo', 'admin/settings'] as $path) {
+    foreach (['admin', 'admin/messages', 'admin/subscribers', 'admin/team', 'admin/team/new', 'admin/team/1', 'admin/seo', 'admin/settings'] as $path) {
       $r = self::http($path);
       $this->assertSame(303, $r['status'], "/$path must redirect");
       $this->assertStringContainsString('/admin/login', (string) $r['headers']['location'], "/$path redirects to the login page");
@@ -41,6 +41,17 @@ final class AdminTest extends HttpTestCase
     $r = self::http('admin/messages/1/delete', 'POST', ['csrf' => 'x']);
     $this->assertSame(303, $r['status']);
     $this->assertStringContainsString('/admin/login', (string) $r['headers']['location']);
+  }
+
+  public function testTeamPostActionsRequireLogin(): void
+  {
+    foreach (['admin/team/1/delete', 'admin/team/1/move', 'admin/team/1'] as $path) {
+      $r = self::http($path, 'POST', ['csrf' => 'x', 'name' => 'Intruder', 'role' => 'Nobody']);
+      $this->assertSame(303, $r['status'], "POST /$path must redirect");
+      $this->assertStringContainsString('/admin/login', (string) $r['headers']['location'], "POST /$path redirects to the login page");
+    }
+    // Nothing was added to the public team section.
+    $this->assertStringNotContainsString('Intruder', self::http('')['body']);
   }
 
   public function testDataFolderIsBlocked(): void

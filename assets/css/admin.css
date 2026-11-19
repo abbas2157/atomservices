@@ -558,3 +558,18 @@ input.text-input[type="file"] { padding: 8px 10px; cursor: pointer; }
 .login-mark { width: 140px; height: 140px; filter: drop-shadow(0 16px 30px rgb(0 0 0 / .25)); }
 .login-art .login-mark g[fill], .login-art .login-mark g[stroke] { filter: brightness(0) invert(1); }
 .login-mark-sm { width: 40px; height: 40px; }
+
+/* ---------- Team editor (/admin/team) ---------- */
+.avatar-photo { object-fit: cover; }
+.avatar-lg { width: 120px; height: 120px; border-radius: var(--radius); font-size: 34px; }
+.team-photo-field { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 18px; }
+.team-photo-field > div:last-child { flex: 1; min-width: 0; display: grid; gap: 8px; }
+.photo-preview img { width: 120px; height: 120px; border-radius: var(--radius); object-fit: cover; border: 1px solid hsl(var(--border)); }
+.stack-sm { display: grid; }
+.stack-sm small { color: hsl(var(--muted-foreground)); }
+.order-form { display: flex; gap: 4px; }
+.order-form .btn { padding: 2px 8px; line-height: 1.4; }
+.order-form .btn[disabled] { opacity: .35; pointer-events: none; }
+@media (max-width: 560px) {
+    .team-photo-field { flex-direction: column; }
+}

@@ -82,8 +82,11 @@ $bars = function (array $data): void {
             $socialSet = count(array_filter(SOCIAL_LINKS));
             $appsSet = array_sum(array_map(fn($stores) => count(array_filter($stores)), APP_LINKS));
             $appsTotal = array_sum(array_map('count', APP_LINKS));
+            $team = team_members(true);
+            $teamShown = count(array_filter($team, fn($m) => $m['published']));
             $setup = [
                 ['SEO checks', $seoIssues === 0, $seoIssues === 0 ? 'All good' : $seoIssues . ' to review'],
+                ['Team section', $teamShown > 0, $teamShown . ' of ' . count($team) . ' shown'],
                 ['Social profiles', $socialSet > 0, $socialSet . ' of ' . count(SOCIAL_LINKS) . ' linked'],
                 ['App store links', $appsSet > 0, $appsSet . ' of ' . $appsTotal . ' live'],
                 ['Google Analytics', GA4_MEASUREMENT_ID !== '', GA4_MEASUREMENT_ID !== '' ? GA4_MEASUREMENT_ID : 'Off'],

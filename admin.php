@@ -12,6 +12,7 @@ define('SITE_BASE', ($scriptDir === '' || $scriptDir === '.') ? '' : $scriptDir)
 require_once __DIR__ . '/includes/site.php';          // e(), constants, organization_schema()
 require_once __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/seo_meta.php';
+require_once __DIR__ . '/includes/team_data.php';
 require_once __DIR__ . '/includes/admin/functions.php';
 
 admin_session_start();
@@ -95,6 +96,18 @@ if (preg_match('#^/subscribers/(\d+)/delete$#', $adminPath, $m) && $method === '
   redirect('/admin/subscribers?deleted=1');
 }
 
+if (preg_match('#^/team/(\d+)/(delete|move)$#', $adminPath, $m) && $method === 'POST') {
+  $id = (int) $m[1];
+  if (csrf_valid($_POST['csrf'] ?? '')) {
+    if ($m[2] === 'delete') {
+      team_delete($id);
+      redirect('/admin/team?deleted=1');
+    }
+    team_move($id, ($_POST['dir'] ?? '') === 'up' ? 'up' : 'down');
+  }
+  redirect('/admin/team');
+}
+
 if ($adminPath === '/messages/export') {
   $rows = admin_messages();
   header('Content-Type: text/csv; charset=utf-8');
@@ -146,6 +159,34 @@ if ($adminPath === '/') {
 } elseif ($adminPath === '/subscribers') {
   $view = 'subscribers';
   $pageTitle = 'Subscribers';
+} elseif ($adminPath === '/team') {
+  $view = 'team';
+  $pageTitle = 'Team';
+} elseif ($adminPath === '/team/new' || (preg_match('#^/team/(\d+)$#', $adminPath, $m) && ($member = team_find((int) $m[1])))) {
+  $member ??= null;
+  $error = null;
+  $posted = null;
+  if ($method === 'POST') {
+    if (!$_POST && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+      // PHP threw the whole request away: the photo was bigger than post_max_size.
+      $error = 'That photo is too large for this server. Please upload one under 8 MB.';
+    } elseif (!csrf_valid($_POST['csrf'] ?? '')) {
+      $error = 'Your session expired. Please try again.';
+    } else {
+      $savedId = team_save($member['id'] ?? null, $_POST, $_FILES['photo'] ?? null, $error);
+      if ($savedId && !$error) {
+        redirect('/admin/team/' . $savedId . '?saved=1');
+      }
+      if ($savedId) {
+        // The details were saved and only the photo failed: keep editing that row.
+        $member = team_find((int) $savedId);
+        $error = 'The details were saved. ' . $error;
+      }
+    }
+    $posted = $_POST;
+  }
+  $view = 'team-edit';
+  $pageTitle = $member ? 'Edit ' . $member['name'] : 'Add team member';
 } elseif ($adminPath === '/seo') {
   $view = 'seo';
   $pageTitle = 'SEO';

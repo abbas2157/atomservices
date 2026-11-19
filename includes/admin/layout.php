@@ -7,6 +7,7 @@ $nav = [
     ['/admin', 'Dashboard', 'dashboard', $adminPath === '/'],
     ['/admin/messages', 'Messages', 'inbox', str_starts_with($adminPath, '/messages')],
     ['/admin/subscribers', 'Subscribers', 'users', str_starts_with($adminPath, '/subscribers')],
+    ['/admin/team', 'Team', 'user', str_starts_with($adminPath, '/team')],
     ['/admin/seo', 'SEO', 'file-text', str_starts_with($adminPath, '/seo')],
     ['/admin/settings', 'Site Settings', 'settings', str_starts_with($adminPath, '/settings')],
 ];

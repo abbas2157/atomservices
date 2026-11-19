@@ -362,30 +362,69 @@ final class PagesTest extends HttpTestCase
     }
   }
 
-  public function testTeamShowsSixPeopleWithExperience(): void
+  /**
+   * The leadership section is editable in /admin/team, so these checks follow the data source
+   * (includes/team_data.php: the as_team table, or the hard-coded defaults when it is absent)
+   * instead of a fixed list of names.
+   */
+  public function testTeamSectionShowsEveryPublishedMember(): void
   {
+    require_once __DIR__ . '/../../includes/team_data.php';
+    $members = team_members();
+    $this->assertGreaterThanOrEqual(1, count($members), 'the team section is never empty');
+
     foreach (['', 'about'] as $path) {
       $x = self::dom(self::http($path)['body']);
       $cards = $x->query('//section[@id="team"]//article[contains(@class,"leader")]');
-      $this->assertSame(6, $cards->length, $path);
-      $names = [];
-      foreach ($cards as $card) {
-        $names[] = trim($x->query('.//h3', $card)->item(0)->textContent);
-        $this->assertSame(1, $x->query('.//p[@class="exp"]/b', $card)->length, 'Each person shows their years in bold');
+      $this->assertSame(count($members), $cards->length, $path);
+
+      foreach ($members as $i => $m) {
+        $card = $cards->item($i);
+        $this->assertSame($m['name'], trim($x->query('.//h3', $card)->item(0)->textContent), "card $i on /$path is in order");
+        $this->assertSame($m['role'], trim($x->query('.//p[@class="role"]', $card)->item(0)->textContent));
+        if ($m['exp'] !== '') {
+          $this->assertSame(1, $x->query('.//p[@class="exp"]/b', $card)->length, $m['name'] . ' shows their years in bold');
+        }
       }
-      $this->assertSame(['Adnan Zaka', 'Mudassar Abbas', 'Muhammad Sohaib Chaudhary', 'Muhammad Javed Rafique', 'Muhammad Ahmed Chaudhary', 'Gulshair Murtaza'], $names);
       $this->assertStringContainsString('10 years running installments', $x->query('//section[@id="team"]//h2')->item(0)->textContent);
     }
   }
 
   public function testTeamPhotosShownWhereAvailable(): void
   {
+    require_once __DIR__ . '/../../includes/team_data.php';
     $x = self::dom(self::http('')['body']);
-    // All six people have a photo.
-    foreach (['Adnan Zaka' => 'team-1', 'Mudassar Abbas' => 'team-2', 'Muhammad Sohaib Chaudhary' => 'team-6', 'Muhammad Javed Rafique' => 'team-3', 'Muhammad Ahmed Chaudhary' => 'team-4', 'Gulshair Murtaza' => 'team-5'] as $name => $img) {
-      $card = '//section[@id="team"]//article[.//h3[.="' . $name . '"]]';
-      $this->assertSame(1, $x->query("$card//img[contains(@src,\"assets/img/team/$img.jpg\")]")->length, $name);
-      $this->assertSame(1, $x->query("$card//source[contains(@srcset,\"assets/img/team/$img.webp\")]")->length, $name);
+    foreach (team_members() as $m) {
+      $card = '//section[@id="team"]//article[.//h3[.="' . $m['name'] . '"]]';
+      $jpg = team_photo_url($m);
+      if ($jpg === '') {
+        $this->assertSame(0, $x->query("$card//img")->length, $m['name'] . ' has no photo, so the initials show');
+        $this->assertNotSame('', trim($x->query("$card//span[@class='initials']")->item(0)->textContent));
+        continue;
+      }
+      $this->assertSame(1, $x->query("$card//img[contains(@src,\"{$m['photo']}.jpg\")]")->length, $m['name']);
+      $this->assertSame(1, $x->query("$card//source[contains(@srcset,\"{$m['photo']}.webp\")]")->length, $m['name']);
+    }
+  }
+
+  public function testTeamContactDetailsAreOnlyShownWhenSetAndPublic(): void
+  {
+    require_once __DIR__ . '/../../includes/team_data.php';
+    $x = self::dom(self::http('')['body']);
+    foreach (team_members(true) as $m) {
+      $card = '//section[@id="team"]//article[.//h3[.="' . $m['name'] . '"]]';
+      if (!$m['published']) {
+        $this->assertSame(0, $x->query($card)->length, $m['name'] . ' is hidden in /admin/team and must not be on the page');
+        continue;
+      }
+      foreach (team_member_contacts($m) as $c) {
+        $this->assertSame(1, $x->query("$card//a[@href=\"{$c['href']}\"]")->length, $m['name'] . ' shows their ' . $c['type']);
+      }
+      if ($m['contact_private']) {
+        foreach (array_filter([$m['email'], $m['phone']]) as $hidden) {
+          $this->assertStringNotContainsString($hidden, $x->query($card)->item(0)->textContent, $m['name'] . "'s details are marked private");
+        }
+      }
     }
   }
 }

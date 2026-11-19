@@ -3,6 +3,8 @@
  * Entries for the header site search. $home is '' on the homepage and 'index.php' elsewhere,
  * so in-page anchors scroll without a reload on the homepage.
  */
+require_once __DIR__ . '/team_data.php';
+
 function search_index(string $home): array {
   return [
     ['title' => 'Atomshop.pk', 'url' => $home . '#products', 'keywords' => 'installments installment shopping bnpl buy now pay later mobiles laptops bikes appliances flagship', 'text' => 'Pakistan\'s installment shopping ecosystem. Plans of 3–12 months from a 20% advance.'],
@@ -20,7 +22,7 @@ function search_index(string $home): array {
     ['title' => 'Mobile app development', 'url' => 'services#mobile-apps', 'keywords' => 'android ios flutter react native app', 'text' => 'Android and iOS apps built for performance.'],
     ['title' => 'SaaS platform development', 'url' => 'services#saas', 'keywords' => 'cloud subscription multi-tenant product', 'text' => 'Cloud products, launch-ready.'],
     ['title' => 'UI/UX design', 'url' => 'services#ui-ux', 'keywords' => 'design user experience interface figma prototype', 'text' => 'User-centred digital experiences.'],
-    ['title' => 'Leadership team', 'url' => $home . '#team', 'keywords' => 'founder ceo cto directors leadership adnan zaka mudassar abbas sohaib ahmed chaudhary gulshair murtaza javed rafique', 'text' => '10 years running installments, plus the builders. The people you\'ll meet at GITEX.'],
+    ['title' => 'Leadership team', 'url' => $home . '#team', 'keywords' => 'founder ceo cto directors leadership ' . team_search_keywords(), 'text' => '10 years running installments, plus the builders. The people you\'ll meet at GITEX.'],
     ['title' => 'Contact us', 'url' => 'contact', 'keywords' => 'email phone whatsapp address lahore wyoming office hours message', 'text' => CONTACT_EMAIL . ' · ' . CONTACT_PHONE],
     ['title' => 'About Atom Services', 'url' => 'about', 'keywords' => 'company story mission values who we are registered details secp ntn', 'text' => 'Smarter finance, better tomorrow. Our story, values and company details.'],
     ['title' => 'FAQs', 'url' => 'faqs', 'keywords' => 'questions help answers how does it work cities credit card hiring careers jobs', 'text' => 'Answers about our company, products and GITEX Global 2026.'],
@@ -28,4 +30,9 @@ function search_index(string $home): array {
     ['title' => 'Privacy policy', 'url' => 'privacy-policy', 'keywords' => 'data gdpr cookies personal information', 'text' => 'How we collect, use and protect personal data.'],
     ['title' => 'Terms of use', 'url' => 'terms', 'keywords' => 'legal terms conditions', 'text' => 'The rules for using atomservices.org.'],
   ];
+}
+
+/** Lower-case names of everyone in the team section, so site search finds them. */
+function team_search_keywords(): string {
+  return mb_strtolower(implode(' ', array_column(team_members(), 'name')));
 }

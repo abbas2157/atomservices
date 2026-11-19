@@ -194,7 +194,11 @@ form.meet .btn { justify-self: start; }
 .leader .role { color: var(--on-navy-muted); font-size: 15px; line-height: 1.45; }
 .leader .exp { color: var(--on-navy-muted); font-size: 14px; line-height: 1.5; }
 .leader .exp b { color: var(--on-navy); font-weight: 600; }
-.leader-links { display: flex; gap: 14px; margin-top: 6px; font: 500 12px/1 var(--mono); }
+.leader-contact { list-style: none; display: grid; gap: 4px; margin: 2px 0 0; padding: 0; }
+.leader-contact a { display: inline-flex; align-items: center; gap: 7px; color: var(--on-navy-muted); text-decoration: none; font-size: 13px; line-height: 1.4; word-break: break-word; }
+.leader-contact a:hover { color: var(--on-navy); }
+.leader-contact svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--amber); }
+.leader-links { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 6px; font: 500 12px/1 var(--mono); }
 .leader-links a { color: var(--on-navy-muted); text-decoration: none; border-bottom: 1px solid rgba(238,241,247,.25); padding-bottom: 2px; }
 .leader-links a:hover { color: var(--on-navy); border-color: var(--amber); }
 @media (max-width: 960px) {
@@ -665,8 +669,8 @@ footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
 
 /* Touch screens: small standalone links get a 40px-tall tap area without changing how they look. */
 @media (pointer: coarse) {
-  .crumbs a, .leader-links a, .legal a, .flag-links a, .pub-card > a { position: relative; }
-  .crumbs a::after, .leader-links a::after, .legal a::after, .flag-links a::after, .pub-card > a::after { content: ""; position: absolute; inset: -12px -4px; }
+  .crumbs a, .leader-links a, .leader-contact a, .legal a, .flag-links a, .pub-card > a { position: relative; }
+  .crumbs a::after, .leader-links a::after, .leader-contact a::after, .legal a::after, .flag-links a::after, .pub-card > a::after { content: ""; position: absolute; inset: -12px -4px; }
 }
 
 /* Ecosystem: four app cards around the ATOM Intelligence hub, as on the investor deck (slide 04).

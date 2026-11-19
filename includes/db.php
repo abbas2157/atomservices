@@ -38,11 +38,11 @@ function db_one(string $sql, array $params = []): ?array {
 }
 
 /**
- * Tables and columns the admin dashboard needs (as_settings, as_page_meta, status/notes on
- * contact_messages). Called from admin.php only, guarded by a schema_version row, so public
+ * Tables and columns the admin dashboard needs (as_settings, as_page_meta, as_team, status/notes
+ * on contact_messages). Called from admin.php only, guarded by a schema_version row, so public
  * pages never pay for it. Safe to run repeatedly.
  */
-const ADMIN_SCHEMA_VERSION = 1;
+const ADMIN_SCHEMA_VERSION = 3;
 
 function admin_migrate(): void {
   $pdo = db();
@@ -70,6 +70,11 @@ function admin_migrate(): void {
     noindex     TINYINT(1) NULL,
     updated_at  DATETIME NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+  // Team members in the leadership section, seeded from the defaults in code (v2);
+  // v3 adds the Facebook/Instagram/X/YouTube/website columns to an existing table.
+  require_once __DIR__ . '/team_data.php';
+  team_install($pdo);
 
   // Inbox workflow columns on the existing contact_messages table (1060 = column already there).
   foreach ([
